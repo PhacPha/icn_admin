@@ -1,0 +1,147 @@
+/* เพิ่ม Animation จาก Animate.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+/* ปรับแต่งเพิ่มเติม */
+body {
+    font-family: 'Kanit', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+/* ปรับแต่งตารางให้มีสไตล์เพิ่มเติม */
+table {
+    min-width: 100%;
+    border-spacing: 0;
+}
+
+th, td {
+    word-wrap: break-word;
+    transition: background-color 0.3s ease;
+}
+
+/* เพิ่มเงาและ Animation ให้ตารางเมื่อ Hover */
+tr:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ปรับแต่งปุ่มให้มี Animation */
+button, a.bg-green-500, a.bg-blue-500, a.bg-red-500 {
+    position: relative;
+    overflow: hidden;
+}
+
+button::after, a.bg-green-500::after, a.bg-blue-500::after, a.bg-red-500::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: left 0.3s ease;
+}
+
+button:hover::after, a.bg-green-500:hover::after, a.bg-blue-500:hover::after, a.bg-red-500:hover::after {
+    left: 100%;
+}
+
+/* ปรับแต่งการ์ดให้มี Animation เมื่อโหลด */
+.card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ปรับแต่ง Modal */
+.fixed.inset-0 {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fixed.inset-0.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fixed.inset-0 .bg-white, .fixed.inset-0 .dark\:bg-gray-800 {
+    transform: scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.fixed.inset-0:not(.hidden) .bg-white, .fixed.inset-0:not(.hidden) .dark\:bg-gray-800 {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* ปรับแต่ง Loading Overlay */
+#loading-overlay {
+    transition: opacity 0.3s ease;
+}
+
+/* ปรับแต่ง Dark Mode */
+.dark .card {
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design เพิ่มเติม */
+@media (max-width: 768px) {
+    .ml-64 {
+        margin-left: 0;
+    }
+
+    aside {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    .grid-cols-1.md\:grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+
+    table, th, td {
+        font-size: 0.9rem;
+    }
+
+    img {
+        max-width: 80px !important;
+    }
+
+    .max-w-md {
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    table, th, td {
+        font-size: 0.8rem;
+    }
+
+    img {
+        max-width: 60px !important;
+    }
+
+    button, a.bg-green-500, a.bg-blue-500, a.bg-red-500 {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .max-w-md {
+        width: 95%;
+    }
+}
