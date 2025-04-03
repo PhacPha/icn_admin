@@ -1,18 +1,18 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<main class="ml-64 p-6 w-full min-h-screen">
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate__animated animate__fadeIn">จัดการหน้า Content</h1>
+<main class="ml-64 p-6 w-full min-h-screen bg-white">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 animate__animated animate__fadeIn">จัดการหน้า Content</h1>
 
     <!-- Blocks -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Blocks</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการ Blocks</h2>
             <button onclick="showAddBlockModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Block</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Blocks</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการ Blocks</h3>
         <?php if (empty($GLOBALS['blocks'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Blocks ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มี Blocks ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['blocks'] as $block): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($block['id']); ?></td>
                                 <td class="p-3">
                                     <img src="<?php echo htmlspecialchars($block['image_url']); ?>" alt="<?php echo htmlspecialchars($block['title']); ?>" class="max-w-[50px] rounded-lg" data-placeholder="/iconnex_thailand_db/img/placeholder.png">
@@ -50,37 +50,37 @@
 
     <!-- Modal สำหรับเพิ่ม Block -->
     <div id="add-block-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่ม Block ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่ม Block ใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_block">
                 <div class="form-group mb-4">
-                    <label for="add-block-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-block-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-block-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-block-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                        <input type="file" id="add-block-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-block-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-block-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="add-block-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-block-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="add-block-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-block-detail1" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 1:</label>
-                    <input type="text" id="add-block-detail1" name="detail1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-block-detail1" class="block text-gray-700 mb-1">รายละเอียด 1:</label>
+                    <input type="text" id="add-block-detail1" name="detail1" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-block-detail2" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 2:</label>
-                    <input type="text" id="add-block-detail2" name="detail2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-block-detail2" class="block text-gray-700 mb-1">รายละเอียด 2:</label>
+                    <input type="text" id="add-block-detail2" name="detail2" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-block-detail3" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 3:</label>
-                    <input type="text" id="add-block-detail3" name="detail3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-block-detail3" class="block text-gray-700 mb-1">รายละเอียด 3:</label>
+                    <input type="text" id="add-block-detail3" name="detail3" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-block-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="add-block-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="add-block-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="add-block-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -92,38 +92,38 @@
 
     <!-- Modal สำหรับแก้ไข Block -->
     <div id="edit-block-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไข Block</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไข Block</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_block">
                 <input type="hidden" name="id" id="edit-block-id">
                 <div class="form-group mb-4">
-                    <label for="edit-block-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-block-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-block-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-block-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                        <input type="file" id="edit-block-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-block-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-block-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="edit-block-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-block-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="edit-block-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-block-detail1" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 1:</label>
-                    <input type="text" id="edit-block-detail1" name="detail1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-block-detail1" class="block text-gray-700 mb-1">รายละเอียด 1:</label>
+                    <input type="text" id="edit-block-detail1" name="detail1" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-block-detail2" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 2:</label>
-                    <input type="text" id="edit-block-detail2" name="detail2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-block-detail2" class="block text-gray-700 mb-1">รายละเอียด 2:</label>
+                    <input type="text" id="edit-block-detail2" name="detail2" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-block-detail3" class="block text-gray-700 dark:text-gray-300 mb-1">รายละเอียด 3:</label>
-                    <input type="text" id="edit-block-detail3" name="detail3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-block-detail3" class="block text-gray-700 mb-1">รายละเอียด 3:</label>
+                    <input type="text" id="edit-block-detail3" name="detail3" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-block-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="edit-block-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="edit-block-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="edit-block-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -135,9 +135,9 @@
 
     <!-- Modal สำหรับลบ Block -->
     <div id="delete-block-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบ Block</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Block นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบ Block</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Block นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="content_management">
                 <input type="hidden" name="action" value="delete_block">

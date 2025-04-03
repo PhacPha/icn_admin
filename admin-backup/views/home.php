@@ -1,25 +1,25 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<main class="ml-64 p-6 w-full min-h-screen">
+<main class="ml-64 p-6 w-full min-h-screen bg-white">
     <!-- Loading Overlay -->
     <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500"></div>
     </div>
 
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate__animated animate__fadeIn">จัดการหน้าแรก (Home Page)</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 animate__animated animate__fadeIn">Manage Home Page</h1>
 
     <!-- การ์ดสำหรับจัดการ Logos -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการโลโก้</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">Manage logo</h2>
             <button onclick="showAddLogoModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่มโลโก้</button>
         </div>
 
         <!-- ตารางแสดงโลโก้ -->
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการโลโก้</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">Logo List</h3>
         <?php if (empty($GLOBALS['logos'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีโลโก้ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มีโลโก้ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="logo-table w-full text-left border-collapse">
@@ -33,7 +33,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['logos'] as $logo): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($logo['id']); ?></td>
                                 <td class="p-3">
                                     <?php if (!empty($logo['image_url'])): ?>
@@ -57,16 +57,16 @@
     </div>
 
     <!-- การ์ดสำหรับจัดการ Services -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการบริการ</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการบริการ</h2>
             <button onclick="showAddServiceModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่มบริการ</button>
         </div>
 
         <!-- ตารางแสดงบริการ -->
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการบริการ</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการบริการ</h3>
         <?php if (empty($GLOBALS['services'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีบริการในระบบ</p>
+            <p class="text-gray-600">ยังไม่มีบริการในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="service-table w-full text-left border-collapse">
@@ -83,7 +83,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['services'] as $service): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($service['id']); ?></td>
                                 <td class="p-3">
                                     <?php if (!empty($service['icon_url'])): ?>
@@ -110,16 +110,16 @@
     </div>
 
     <!-- การ์ดสำหรับจัดการ SomeWorks -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการผลงาน (SomeWorks)</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการผลงาน (SomeWorks)</h2>
             <button onclick="showAddWorkModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่มผลงาน</button>
         </div>
 
         <!-- ตารางแสดงผลงาน -->
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการผลงาน</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการผลงาน</h3>
         <?php if (empty($GLOBALS['works'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีผลงานในระบบ</p>
+            <p class="text-gray-600">ยังไม่มีผลงานในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="work-table w-full text-left border-collapse">
@@ -136,7 +136,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['works'] as $work): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($work['id']); ?></td>
                                 <td class="p-3">
                                     <?php if (!empty($work['image_url'])): ?>
@@ -163,9 +163,9 @@
     </div>
 
     <!-- การ์ดสำหรับจัดการ Testimonials -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการคอมเมนต์ (Testimonials)</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการคอมเมนต์ (Testimonials)</h2>
             <button onclick="showAddTestimonialModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่มคอมเมนต์</button>
         </div>
 
@@ -185,9 +185,9 @@
         <?php endif; ?>
 
         <!-- ตารางแสดงคอมเมนต์ -->
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการคอมเมนต์</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการคอมเมนต์</h3>
         <?php if (empty($GLOBALS['testimonials'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มีคอมเมนต์ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มีคอมเมนต์ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="testimonial-table w-full text-left border-collapse">
@@ -204,7 +204,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['testimonials'] as $testimonial): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($testimonial['id']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($testimonial['quote']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($testimonial['text']); ?></td>
@@ -232,21 +232,21 @@
 
     <!-- Modal สำหรับเพิ่มโลโก้ -->
     <div id="add-logo-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่มโลโก้ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่มโลโก้ใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_logo">
                 <div class="form-group mb-4">
-                    <label for="add-logo-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-logo-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-logo-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-logo-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="add-logo-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-logo-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-logo-alt_text" class="block text-gray-700 dark:text-gray-300 mb-1">ข้อความ Alt:</label>
-                    <input type="text" id="add-logo-alt_text" name="alt_text" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-logo-alt_text" class="block text-gray-700 mb-1">ข้อความ Alt:</label>
+                    <input type="text" id="add-logo-alt_text" name="alt_text" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -258,22 +258,22 @@
 
     <!-- Modal สำหรับแก้ไขโลโก้ -->
     <div id="edit-logo-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไขโลโก้</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไขโลโก้</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_logo">
                 <input type="hidden" name="id" id="edit-logo-id">
                 <div class="form-group mb-4">
-                    <label for="edit-logo-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-logo-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-logo-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-logo-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="edit-logo-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-logo-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-logo-alt_text" class="block text-gray-700 dark:text-gray-300 mb-1">ข้อความ Alt:</label>
-                    <input type="text" id="edit-logo-alt_text" name="alt_text" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-logo-alt_text" class="block text-gray-700 mb-1">ข้อความ Alt:</label>
+                    <input type="text" id="edit-logo-alt_text" name="alt_text" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -285,9 +285,9 @@
 
     <!-- Modal สำหรับลบโลโก้ -->
     <div id="delete-logo-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบโลโก้</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบโลโก้นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบโลโก้</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบโลโก้นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="home">
                 <input type="hidden" name="action" value="delete_logo">
@@ -302,33 +302,33 @@
 
     <!-- Modal สำหรับเพิ่มบริการ -->
     <div id="add-service-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่มบริการใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่มบริการใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_service">
                 <div class="form-group mb-4">
-                    <label for="add-service-icon" class="block text-gray-700 dark:text-gray-300 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-service-icon" class="block text-gray-700 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-service-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-service-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="add-service-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-service-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อบริการ:</label>
-                    <input type="text" id="add-service-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-service-title" class="block text-gray-700 mb-1">ชื่อบริการ:</label>
+                    <input type="text" id="add-service-title" name="title" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="add-service-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-service-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="add-service-list_item1" name="list_item1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="add-service-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-service-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="add-service-list_item2" name="list_item2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="add-service-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-service-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="add-service-list_item3" name="list_item3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -340,34 +340,34 @@
 
     <!-- Modal สำหรับแก้ไขบริการ -->
     <div id="edit-service-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไขบริการ</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไขบริการ</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_service">
                 <input type="hidden" name="id" id="edit-service-id">
                 <div class="form-group mb-4">
-                    <label for="edit-service-icon" class="block text-gray-700 dark:text-gray-300 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-service-icon" class="block text-gray-700 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-service-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-service-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="edit-service-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-service-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อบริการ:</label>
-                    <input type="text" id="edit-service-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-service-title" class="block text-gray-700 mb-1">ชื่อบริการ:</label>
+                    <input type="text" id="edit-service-title" name="title" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="edit-service-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-service-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="edit-service-list_item1" name="list_item1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="edit-service-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-service-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="edit-service-list_item2" name="list_item2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="edit-service-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-service-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="edit-service-list_item3" name="list_item3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -379,9 +379,9 @@
 
     <!-- Modal สำหรับลบบริการ -->
     <div id="delete-service-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบบริการ</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบบริการ</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="home">
                 <input type="hidden" name="action" value="delete_service">
@@ -396,33 +396,33 @@
 
     <!-- Modal สำหรับเพิ่มผลงาน -->
     <div id="add-work-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่มผลงานใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่มผลงานใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_work">
                 <div class="form-group mb-4">
-                    <label for="add-work-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-work-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-work-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-work-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="add-work-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-work-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อผลงาน:</label>
-                    <input type="text" id="add-work-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-work-title" class="block text-gray-700 mb-1">ชื่อผลงาน:</label>
+                    <input type="text" id="add-work-title" name="title" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="add-work-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-work-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="add-work-list_item1" name="list_item1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="add-work-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-work-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="add-work-list_item2" name="list_item2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="add-work-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-work-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="add-work-list_item3" name="list_item3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -434,34 +434,34 @@
 
     <!-- Modal สำหรับแก้ไขผลงาน -->
     <div id="edit-work-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไขผลงาน</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไขผลงาน</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_work">
                 <input type="hidden" name="id" id="edit-work-id">
                 <div class="form-group mb-4">
-                    <label for="edit-work-image" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-work-image" class="block text-gray-700 mb-1">รูปภาพ (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-work-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-work-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="edit-work-image" name="image" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-work-image_url" name="image_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อผลงาน:</label>
-                    <input type="text" id="edit-work-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-work-title" class="block text-gray-700 mb-1">ชื่อผลงาน:</label>
+                    <input type="text" id="edit-work-title" name="title" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="edit-work-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-work-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="edit-work-list_item1" name="list_item1" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="edit-work-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-work-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="edit-work-list_item2" name="list_item2" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="edit-work-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-work-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="edit-work-list_item3" name="list_item3" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -473,9 +473,9 @@
 
     <!-- Modal สำหรับลบผลงาน -->
     <div id="delete-work-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบผลงาน</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบผลงานนี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบผลงาน</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบผลงานนี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="home">
                 <input type="hidden" name="action" value="delete_work">
@@ -490,32 +490,32 @@
 
     <!-- Modal สำหรับเพิ่มคอมเมนต์ (Testimonials) -->
     <div id="add-testimonial-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่มคอมเมนต์ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่มคอมเมนต์ใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_testimonial">
                 <div class="form-group mb-4">
-                    <label for="add-testimonial-quote" class="block text-gray-700 dark:text-gray-300 mb-1">คำพูด (Quote):</label>
-                    <input type="text" id="add-testimonial-quote" name="quote" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-testimonial-quote" class="block text-gray-700 mb-1">คำพูด (Quote):</label>
+                    <input type="text" id="add-testimonial-quote" name="quote" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-testimonial-text" class="block text-gray-700 dark:text-gray-300 mb-1">ข้อความ (Text):</label>
-                    <textarea id="add-testimonial-text" name="text" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    <label for="add-testimonial-text" class="block text-gray-700 mb-1">ข้อความ (Text):</label>
+                    <textarea id="add-testimonial-text" name="text" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-testimonial-author_name" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อผู้เขียน:</label>
-                    <input type="text" id="add-testimonial-author_name" name="author_name" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-testimonial-author_name" class="block text-gray-700 mb-1">ชื่อผู้เขียน:</label>
+                    <input type="text" id="add-testimonial-author_name" name="author_name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-testimonial-author_location" class="block text-gray-700 dark:text-gray-300 mb-1">ที่อยู่ผู้เขียน:</label>
-                    <input type="text" id="add-testimonial-author_location" name="author_location" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="add-testimonial-author_location" class="block text-gray-700 mb-1">ที่อยู่ผู้เขียน:</label>
+                    <input type="text" id="add-testimonial-author_location" name="author_location" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-testimonial-avatar" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (Avatar) (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-testimonial-avatar" class="block text-gray-700 mb-1">รูปภาพ (Avatar) (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-testimonial-avatar" name="avatar" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-testimonial-avatar_url" name="avatar_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="add-testimonial-avatar" name="avatar" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-testimonial-avatar_url" name="avatar_url" placeholder="วาง URL รูปภาพ" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -528,33 +528,33 @@
 
     <!-- Modal สำหรับแก้ไขคอมเมนต์ (Testimonials) -->
     <div id="edit-testimonial-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไขคอมเมนต์</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไขคอมเมนต์</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_testimonial">
                 <input type="hidden" name="id" id="edit-testimonial-id">
                 <div class="form-group mb-4">
-                    <label for="edit-testimonial-quote" class="block text-gray-700 dark:text-gray-300 mb-1">คำพูด (Quote):</label>
-                    <input type="text" id="edit-testimonial-quote" name="quote" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-testimonial-quote" class="block text-gray-700 mb-1">คำพูด (Quote):</label>
+                    <input type="text" id="edit-testimonial-quote" name="quote" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-testimonial-text" class="block text-gray-700 dark:text-gray-300 mb-1">ข้อความ (Text):</label>
-                    <textarea id="edit-testimonial-text" name="text" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                    <label for="edit-testimonial-text" class="block text-gray-700 mb-1">ข้อความ (Text):</label>
+                    <textarea id="edit-testimonial-text" name="text" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-testimonial-author_name" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อผู้เขียน:</label>
-                    <input type="text" id="edit-testimonial-author_name" name="author_name" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-testimonial-author_name" class="block text-gray-700 mb-1">ชื่อผู้เขียน:</label>
+                    <input type="text" id="edit-testimonial-author_name" name="author_name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-testimonial-author_location" class="block text-gray-700 dark:text-gray-300 mb-1">ที่อยู่ผู้เขียน:</label>
-                    <input type="text" id="edit-testimonial-author_location" name="author_location" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <label for="edit-testimonial-author_location" class="block text-gray-700 mb-1">ที่อยู่ผู้เขียน:</label>
+                    <input type="text" id="edit-testimonial-author_location" name="author_location" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-testimonial-avatar" class="block text-gray-700 dark:text-gray-300 mb-1">รูปภาพ (Avatar) (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-testimonial-avatar" class="block text-gray-700 mb-1">รูปภาพ (Avatar) (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-testimonial-avatar" name="avatar" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-testimonial-avatar_url" name="avatar_url" placeholder="วาง URL รูปภาพ" class="w-full p-1 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="file" id="edit-testimonial-avatar" name="avatar" accept="image/*" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-testimonial-avatar_url" name="avatar_url" placeholder="วาง URL รูปภาพ" class="w-full p-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -567,9 +567,9 @@
 
     <!-- Modal สำหรับลบคอมเมนต์ (Testimonials) -->
     <div id="delete-testimonial-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบคอมเมนต์</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบคอมเมนต์นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบคอมเมนต์</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบคอมเมนต์นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="home">
                 <input type="hidden" name="action" value="delete_testimonial">
@@ -764,19 +764,6 @@ function showDeleteTestimonialModal(id) {
 function hideDeleteTestimonialModal() {
     document.getElementById('delete-testimonial-modal').classList.add('hidden');
 }
-
-// Dark Mode Toggle
-document.getElementById('dark-mode-toggle').addEventListener('click', function() {
-    document.body.classList.toggle('dark');
-    const icon = this.querySelector('i');
-    if (document.body.classList.contains('dark')) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
-});
 </script>
 
 <?php include 'partials/footer.php'; ?>

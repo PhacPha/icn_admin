@@ -1,18 +1,18 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<main class="ml-64 p-6 w-full min-h-screen">
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate__animated animate__fadeIn">จัดการหน้า Services</h1>
+<main class="ml-64 p-6 w-full min-h-screen bg-white">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 animate__animated animate__fadeIn">จัดการหน้า Services</h1>
 
     <!-- Service Cards -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Service Cards</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการ Service Cards</h2>
             <button onclick="showAddServiceCardModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Service Card</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Service Cards</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการ Service Cards</h3>
         <?php if (empty($GLOBALS['service_cards'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Service Cards ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มี Service Cards ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -28,7 +28,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['service_cards'] as $card): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($card['id']); ?></td>
                                 <td class="p-3">
                                     <img src="<?php echo htmlspecialchars($card['icon_url']); ?>" alt="<?php echo htmlspecialchars($card['title']); ?>" class="max-w-[50px] rounded-lg" data-placeholder="/iconnex_thailand_db/img/placeholder.png">
@@ -49,14 +49,14 @@
     </div>
 
     <!-- Why Choose Us -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Why Choose Us</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการ Why Choose Us</h2>
             <button onclick="showAddWhyChooseUsModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Why Choose Us</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Why Choose Us</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการ Why Choose Us</h3>
         <?php if (empty($GLOBALS['why_choose_us'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Why Choose Us ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มี Why Choose Us ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['why_choose_us'] as $item): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($item['id']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($item['title']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($item['description']); ?></td>
@@ -87,14 +87,14 @@
     </div>
 
     <!-- Work Process -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Work Process</h2>
+            <h2 class="text-2xl font-semibold text-gray-800">จัดการ Work Process</h2>
             <button onclick="showAddWorkProcessModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Work Process</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Work Process</h3>
+        <h3 class="text-xl font-medium text-gray-700 mt-6 mb-3">รายการ Work Process</h3>
         <?php if (empty($GLOBALS['work_process'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Work Process ในระบบ</p>
+            <p class="text-gray-600">ยังไม่มี Work Process ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
@@ -109,7 +109,7 @@
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['work_process'] as $process): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
                                 <td class="p-3"><?php echo htmlspecialchars($process['id']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($process['step']); ?></td>
                                 <td class="p-3"><?php echo htmlspecialchars($process['title']); ?></td>
@@ -128,41 +128,41 @@
 
     <!-- Modal สำหรับเพิ่ม Service Card -->
     <div id="add-service-card-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่ม Service Card ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่ม Service Card ใหม่</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="add_service_card">
                 <div class="form-group mb-4">
-                    <label for="add-service-card-icon" class="block text-gray-700 dark:text-gray-300 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
+                    <label for="add-service-card-icon" class="block text-gray-700 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="add-service-card-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="add-service-card-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                        <input type="file" id="add-service-card-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="add-service-card-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="add-service-card-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-service-card-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="add-service-card-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="add-service-card-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="add-service-card-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="add-service-card-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="add-service-card-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-service-card-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="add-service-card-list_item1" name="list_item1" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="add-service-card-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-service-card-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="add-service-card-list_item2" name="list_item2" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="add-service-card-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-service-card-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="add-service-card-list_item3" name="list_item3" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-service-card-list_item4" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 4:</label>
-                    <input type="text" id="add-service-card-list_item4" name="list_item4" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-service-card-list_item4" class="block text-gray-700 mb-1">รายการที่ 4:</label>
+                    <input type="text" id="add-service-card-list_item4" name="list_item4" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -174,42 +174,42 @@
 
     <!-- Modal สำหรับแก้ไข Service Card -->
     <div id="edit-service-card-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไข Service Card</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไข Service Card</h3>
             <form method="POST" action="" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="edit_service_card">
                 <input type="hidden" name="id" id="edit-service-card-id">
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-icon" class="block text-gray-700 dark:text-gray-300 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
+                    <label for="edit-service-card-icon" class="block text-gray-700 mb-1">ไอคอน (อัปโหลดหรือวาง URL):</label>
                     <div class="flex items-center gap-2">
-                        <input type="file" id="edit-service-card-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                        <span class="text-gray-500 dark:text-gray-400">หรือ</span>
-                        <input type="url" id="edit-service-card-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                        <input type="file" id="edit-service-card-icon" name="icon" accept="image/*" class="w-full p-2 border rounded-lg">
+                        <span class="text-gray-500">หรือ</span>
+                        <input type="url" id="edit-service-card-icon_url" name="icon_url" placeholder="วาง URL ไอคอน" class="w-full p-2 border rounded-lg">
                     </div>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="edit-service-card-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-service-card-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="edit-service-card-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="edit-service-card-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="edit-service-card-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="edit-service-card-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-list_item1" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 1:</label>
-                    <input type="text" id="edit-service-card-list_item1" name="list_item1" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-service-card-list_item1" class="block text-gray-700 mb-1">รายการที่ 1:</label>
+                    <input type="text" id="edit-service-card-list_item1" name="list_item1" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-list_item2" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 2:</label>
-                    <input type="text" id="edit-service-card-list_item2" name="list_item2" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-service-card-list_item2" class="block text-gray-700 mb-1">รายการที่ 2:</label>
+                    <input type="text" id="edit-service-card-list_item2" name="list_item2" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-list_item3" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 3:</label>
-                    <input type="text" id="edit-service-card-list_item3" name="list_item3" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-service-card-list_item3" class="block text-gray-700 mb-1">รายการที่ 3:</label>
+                    <input type="text" id="edit-service-card-list_item3" name="list_item3" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-service-card-list_item4" class="block text-gray-700 dark:text-gray-300 mb-1">รายการที่ 4:</label>
-                    <input type="text" id="edit-service-card-list_item4" name="list_item4" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-service-card-list_item4" class="block text-gray-700 mb-1">รายการที่ 4:</label>
+                    <input type="text" id="edit-service-card-list_item4" name="list_item4" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -221,9 +221,9 @@
 
     <!-- Modal สำหรับลบ Service Card -->
     <div id="delete-service-card-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบ Service Card</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Service Card นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบ Service Card</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Service Card นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="service_management">
                 <input type="hidden" name="action" value="delete_service_card">
@@ -238,17 +238,17 @@
 
     <!-- Modal สำหรับเพิ่ม Why Choose Us -->
     <div id="add-why-choose-us-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่ม Why Choose Us ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่ม Why Choose Us ใหม่</h3>
             <form method="POST" action="">
                 <input type="hidden" name="action" value="add_why_choose_us">
                 <div class="form-group mb-4">
-                    <label for="add-why-choose-us-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="add-why-choose-us-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-why-choose-us-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="add-why-choose-us-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-why-choose-us-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="add-why-choose-us-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="add-why-choose-us-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="add-why-choose-us-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -260,18 +260,18 @@
 
     <!-- Modal สำหรับแก้ไข Why Choose Us -->
     <div id="edit-why-choose-us-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไข Why Choose Us</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไข Why Choose Us</h3>
             <form method="POST" action="">
                 <input type="hidden" name="action" value="edit_why_choose_us">
                 <input type="hidden" name="id" id="edit-why-choose-us-id">
                 <div class="form-group mb-4">
-                    <label for="edit-why-choose-us-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="edit-why-choose-us-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-why-choose-us-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="edit-why-choose-us-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-why-choose-us-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="edit-why-choose-us-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="edit-why-choose-us-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="edit-why-choose-us-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -283,9 +283,9 @@
 
     <!-- Modal สำหรับลบ Why Choose Us -->
     <div id="delete-why-choose-us-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบ Why Choose Us</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Why Choose Us นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบ Why Choose Us</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Why Choose Us นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="service_management">
                 <input type="hidden" name="action" value="delete_why_choose_us">
@@ -300,21 +300,21 @@
 
     <!-- Modal สำหรับเพิ่ม Work Process -->
     <div id="add-work-process-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">เพิ่ม Work Process ใหม่</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">เพิ่ม Work Process ใหม่</h3>
             <form method="POST" action="">
                 <input type="hidden" name="action" value="add_work_process">
                 <div class="form-group mb-4">
-                    <label for="add-work-process-step" class="block text-gray-700 dark:text-gray-300 mb-1">ขั้นตอน:</label>
-                    <input type="text" id="add-work-process-step" name="step" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-work-process-step" class="block text-gray-700 mb-1">ขั้นตอน:</label>
+                    <input type="text" id="add-work-process-step" name="step" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-process-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="add-work-process-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="add-work-process-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="add-work-process-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="add-work-process-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="add-work-process-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="add-work-process-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="add-work-process-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">เพิ่ม</button>
@@ -326,22 +326,22 @@
 
     <!-- Modal สำหรับแก้ไข Work Process -->
     <div id="edit-work-process-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">แก้ไข Work Process</h3>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">แก้ไข Work Process</h3>
             <form method="POST" action="">
                 <input type="hidden" name="action" value="edit_work_process">
                 <input type="hidden" name="id" id="edit-work-process-id">
                 <div class="form-group mb-4">
-                    <label for="edit-work-process-step" class="block text-gray-700 dark:text-gray-300 mb-1">ขั้นตอน:</label>
-                    <input type="text" id="edit-work-process-step" name="step" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-work-process-step" class="block text-gray-700 mb-1">ขั้นตอน:</label>
+                    <input type="text" id="edit-work-process-step" name="step" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-process-title" class="block text-gray-700 dark:text-gray-300 mb-1">ชื่อ:</label>
-                    <input type="text" id="edit-work-process-title" name="title" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required>
+                    <label for="edit-work-process-title" class="block text-gray-700 mb-1">ชื่อ:</label>
+                    <input type="text" id="edit-work-process-title" name="title" class="w-full p-2 border rounded-lg" required>
                 </div>
                 <div class="form-group mb-4">
-                    <label for="edit-work-process-description" class="block text-gray-700 dark:text-gray-300 mb-1">คำอธิบาย:</label>
-                    <textarea id="edit-work-process-description" name="description" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" required></textarea>
+                    <label for="edit-work-process-description" class="block text-gray-700 mb-1">คำอธิบาย:</label>
+                    <textarea id="edit-work-process-description" name="description" class="w-full p-2 border rounded-lg" required></textarea>
                 </div>
                 <div class="flex gap-2">
                     <button type="submit" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200 flex-1">บันทึก</button>
@@ -353,9 +353,9 @@
 
     <!-- Modal สำหรับลบ Work Process -->
     <div id="delete-work-process-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
-            <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mb-4">ยืนยันการลบ Work Process</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Work Process นี้?</p>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบ Work Process</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือไม่ว่าต้องการลบ Work Process นี้?</p>
             <form method="GET" action="">
                 <input type="hidden" name="page" value="service_management">
                 <input type="hidden" name="action" value="delete_work_process">
