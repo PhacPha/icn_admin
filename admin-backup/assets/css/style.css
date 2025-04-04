@@ -1,135 +1,136 @@
 /* เพิ่ม Animation จาก Animate.css */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+@import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 
 /* ปรับแต่งเพิ่มเติม */
 body {
-    font-family: 'Kanit', sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-    background-color: #f9f9f9;
+  font-family: "Kanit", sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+  background-color: #ffffff;
 }
 
 .container {
-    display: flex;
-    width: 100%;
+  display: flex;
+  width: 100%;
 }
 
 .sidebar {
-    background-color: #0056b3 ; /* Dark blue-gray background */
-    width: 256px; /* w-64 = 16rem = 256px */
-    height: 100vh; /* h-screen */
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 1.5rem; /* p-6 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
-    transition: all 0.3s ease; /* transition-all duration-300 */
+  background-color: #0056b3; /* Dark blue-gray background */
+  width: 256px; /* w-64 = 16rem = 256px */
+  height: 100vh; /* h-screen */
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1.5rem; /* p-6 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+  transition: all 0.3s ease; /* transition-all duration-300 */
 }
 
 /* Sidebar header */
 .sidebar h2 {
-    font-size: 1.5rem; /* text-2xl */
-    font-weight: 700; /* font-bold */
-    text-align: center;
-    margin-bottom: 2rem; /* mb-8 */
-    color: white;
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  text-align: center;
+  margin-bottom: 2rem; /* mb-8 */
+  color: white;
 }
 
 /* Navigation links */
 .sidebar nav ul li {
-    margin-bottom: 1rem; /* mb-4 */
+  margin-bottom: 1rem; /* mb-4 */
 }
 
 .sidebar nav ul li a {
-    display: flex;
-    align-items: center; /* items-center */
-    gap: 0.75rem; /* gap-3 */
-    padding: 0.75rem; /* p-3 */
-    color: white;
-    text-decoration: none;
-    border-radius: 5rem;
-    transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center; /* items-center */
+  gap: 0.75rem; /* gap-3 */
+  padding: 0.75rem; /* p-3 */
+  color: white;
+  text-decoration: none;
+  border-radius: 5rem;
+  transition: background-color 0.2s ease;
 }
 
 /* Hover effect for links */
 .sidebar nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Active link styling (optional) */
 .sidebar nav ul li a.active {
-    background-color: #3498db;
+  background-color: #3498db;
 }
 
 /* Icon styling */
 .sidebar nav ul li a i {
-    font-size: 1.1rem;
-    width: 20px;
-    text-align: center;
+  font-size: 1.1rem;
+  width: 20px;
+  text-align: center;
 }
 
 /* Responsive design (optional) */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
+  .sidebar {
+    width: 200px;
+  }
 }
 
 /* เพิ่มในไฟล์ CSS ที่คุณใช้ */
 .main-content {
-    margin-left: 256px; /* ปรับตามความกว้างของ sidebar */
-    background-color: #f9f9f9;
+  margin-left: 256px; /* ปรับตามความกว้างของ sidebar */
+  background-color: #f9f9f9;
 }
 
 .stat-card {
-    transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .social-stats table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
-.social-stats th, .social-stats td {
-    border-bottom: 1px solid #e5e7eb;
+.social-stats th,
+.social-stats td {
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .chart {
-    width: 100%;
+  width: 100%;
 }
 
 /* สไตล์สำหรับปุ่ม */
 button {
-    background-color: #3b82f6; /* blue-500 */
-    color: white;
-    padding: 0.5rem 1rem; /* p-2 = 8px */
-    border-radius: 0.5rem; /* rounded-lg = 8px */
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  padding: 0.5rem 1rem; /* p-2 = 8px */
+  border-radius: 0.5rem; /* rounded-lg = 8px */
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
 button:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 /* สไตล์สำหรับปุ่มใน modal */
 button[type="submit"] {
-    background-color: #10b981; /* green-500 */
+  background-color: #10b981; /* green-500 */
 }
 
 button[type="submit"]:hover {
-    background-color: #059669; /* green-600 */
+  background-color: #059669; /* green-600 */
 }
 
 button[type="button"] {
-    background-color: #6b7280; /* gray-500 */
+  background-color: #6b7280; /* gray-500 */
 }
 
 button[type="button"]:hover {
-    background-color: #4b5563; /* gray-600 */
+  background-color: #4b5563; /* gray-600 */
 }
