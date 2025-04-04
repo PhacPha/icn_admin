@@ -13,5 +13,5 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+<body>
     <div class="container flex">
