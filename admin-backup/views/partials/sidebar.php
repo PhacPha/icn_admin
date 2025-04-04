@@ -1,5 +1,13 @@
-<aside class="sidebar w-64 text-white h-screen fixed top-0 left-0 p-6 shadow-lg transition-all duration-300">
-    <h2 class="text-2xl font-bold text-center mb-8">Iconnex Admin</h2>
+<aside class="sidebar w-64 text-white h-screen fixed top-0 left-0 p-6 shadow-lg transition-all duration-300 bg-blue-600">
+    <!-- กล่องรวมโลโก้ + ชื่อ Admin -->
+    <div class="flex flex-col items-center mb-6">
+        <!-- ตรงนี้คือส่วนของโลโก้ -->
+        <img src="../icn_admin/admin_backup/img/logo.png" alt="Iconnex Logo" class="w-20 h-20 object-cover rounded-full mb-2" />
+
+        <!-- ข้อความ Iconnex Admin -->
+        <h2 class="text-2xl font-bold">Iconnex Admin</h2>
+    </div>
+
     <nav>
         <ul>
             <li class="mb-4">
@@ -29,4 +37,4 @@
             </li>
         </ul>
     </nav>
-</aside>s
+</aside>

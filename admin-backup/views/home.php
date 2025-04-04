@@ -22,31 +22,43 @@
             <p class="text-gray-600">ยังไม่มีโลโก้ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="logo-table w-full text-left border-collapse">
+                <table class="logo-table w-full text-center border-separate border border-gray-300">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">รูปภาพ</th>
-                            <th class="p-3">ข้อความ Alt</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-300">ID</th>
+                            <th class="p-3 border border-gray-300">รูปภาพ</th>
+                            <th class="p-3 border border-gray-300">ข้อความ Alt</th>
+                            <th class="p-3 border border-gray-300">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['logos'] as $logo): ?>
                             <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($logo['id']); ?></td>
-                                <td class="p-3">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($logo['id']); ?></td>
+                                <td class="p-3 border border-gray-300">
                                     <?php if (!empty($logo['image_url'])): ?>
-                                        <img src="<?php echo htmlspecialchars($logo['image_url']); ?>" alt="<?php echo htmlspecialchars($logo['alt_text']); ?>" class="max-w-[100px] rounded-lg" data-placeholder="/assets/images/placeholder.png">
+                                        <img src="<?php echo htmlspecialchars($logo['image_url']); ?>"
+                                             alt="<?php echo htmlspecialchars($logo['alt_text']); ?>"
+                                             class="max-w-[100px] rounded-lg"
+                                             data-placeholder="/assets/images/placeholder.png">
                                     <?php else: ?>
                                         <img src="/assets/images/placeholder.png" alt="Placeholder" class="max-w-[100px] rounded-lg">
                                         <p class="text-red-500 text-sm mt-1">ไม่มีรูปภาพ</p>
                                     <?php endif; ?>
                                 </td>
-                                <td class="p-3"><?php echo htmlspecialchars($logo['alt_text']); ?></td>
-                                <td class="p-3 flex gap-2">
-                                    <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditLogoModal(<?php echo $logo['id']; ?>, '<?php echo htmlspecialchars($logo['image_url']); ?>', '<?php echo htmlspecialchars($logo['alt_text']); ?>')">แก้ไข</button>
-                                    <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteLogoModal(<?php echo $logo['id']; ?>)">ลบ</button>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($logo['alt_text']); ?></td>
+                                <!-- ปุ่มแก้ไขและลบอยู่ใน div แบบ flex-col -->
+                                <td class="p-3 border border-gray-300 align-middle">
+                                    <div class="flex flex-col items-center gap-1">
+                                        <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                                                onclick="showEditLogoModal(<?php echo $logo['id']; ?>, '<?php echo htmlspecialchars($logo['image_url']); ?>', '<?php echo htmlspecialchars($logo['alt_text']); ?>')">
+                                            แก้ไข
+                                        </button>
+                                        <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
+                                                onclick="showDeleteLogoModal(<?php echo $logo['id']; ?>)">
+                                            ลบ
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -69,37 +81,49 @@
             <p class="text-gray-600">ยังไม่มีบริการในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="service-table w-full text-left border-collapse">
+                <table class="service-table w-full text-center border-separate border border-gray-300">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">ไอคอน</th>
-                            <th class="p-3">ชื่อบริการ</th>
-                            <th class="p-3">รายการที่ 1</th>
-                            <th class="p-3">รายการที่ 2</th>
-                            <th class="p-3">รายการที่ 3</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-300">ID</th>
+                            <th class="p-3 border border-gray-300">ไอคอน</th>
+                            <th class="p-3 border border-gray-300">ชื่อบริการ</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 1</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 2</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 3</th>
+                            <th class="p-3 border border-gray-300">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['services'] as $service): ?>
                             <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($service['id']); ?></td>
-                                <td class="p-3">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($service['id']); ?></td>
+                                <td class="p-3 border border-gray-300">
                                     <?php if (!empty($service['icon_url'])): ?>
-                                        <img src="<?php echo htmlspecialchars($service['icon_url']); ?>" alt="<?php echo htmlspecialchars($service['title']); ?>" class="max-w-[50px] rounded-lg" data-placeholder="/assets/images/placeholder.png">
+                                        <img src="<?php echo htmlspecialchars($service['icon_url']); ?>"
+                                             alt="<?php echo htmlspecialchars($service['title']); ?>"
+                                             class="max-w-[50px] rounded-lg"
+                                             data-placeholder="/assets/images/placeholder.png">
                                     <?php else: ?>
                                         <img src="/assets/images/placeholder.png" alt="Placeholder" class="max-w-[50px] rounded-lg">
                                         <p class="text-red-500 text-sm mt-1">ไม่มีไอคอน</p>
                                     <?php endif; ?>
                                 </td>
-                                <td class="p-3"><?php echo htmlspecialchars($service['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($service['list_item1']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($service['list_item2']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($service['list_item3']); ?></td>
-                                <td class="p-3 flex gap-2">
-                                    <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditServiceModal(<?php echo $service['id']; ?>, '<?php echo htmlspecialchars($service['icon_url']); ?>', '<?php echo htmlspecialchars($service['title']); ?>', '<?php echo htmlspecialchars($service['list_item1']); ?>', '<?php echo htmlspecialchars($service['list_item2']); ?>', '<?php echo htmlspecialchars($service['list_item3']); ?>')">แก้ไข</button>
-                                    <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteServiceModal(<?php echo $service['id']; ?>)">ลบ</button>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($service['title']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($service['list_item1']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($service['list_item2']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($service['list_item3']); ?></td>
+                                <!-- ปุ่มแก้ไขและลบ -->
+                                <td class="p-3 border border-gray-300 align-middle">
+                                    <div class="flex flex-col items-center gap-1">
+                                        <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                                                onclick="showEditServiceModal(<?php echo $service['id']; ?>, '<?php echo htmlspecialchars($service['icon_url']); ?>', '<?php echo htmlspecialchars($service['title']); ?>', '<?php echo htmlspecialchars($service['list_item1']); ?>', '<?php echo htmlspecialchars($service['list_item2']); ?>', '<?php echo htmlspecialchars($service['list_item3']); ?>')">
+                                            แก้ไข
+                                        </button>
+                                        <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
+                                                onclick="showDeleteServiceModal(<?php echo $service['id']; ?>)">
+                                            ลบ
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -122,37 +146,49 @@
             <p class="text-gray-600">ยังไม่มีผลงานในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="work-table w-full text-left border-collapse">
+                <table class="work-table w-full text-center border-separate border border-gray-300">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">รูปภาพ</th>
-                            <th class="p-3">ชื่อผลงาน</th>
-                            <th class="p-3">รายการที่ 1</th>
-                            <th class="p-3">รายการที่ 2</th>
-                            <th class="p-3">รายการที่ 3</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-300">ID</th>
+                            <th class="p-3 border border-gray-300">รูปภาพ</th>
+                            <th class="p-3 border border-gray-300">ชื่อผลงาน</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 1</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 2</th>
+                            <th class="p-3 border border-gray-300">รายการที่ 3</th>
+                            <th class="p-3 border border-gray-300">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['works'] as $work): ?>
                             <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($work['id']); ?></td>
-                                <td class="p-3">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($work['id']); ?></td>
+                                <td class="p-3 border border-gray-300">
                                     <?php if (!empty($work['image_url'])): ?>
-                                        <img src="<?php echo htmlspecialchars($work['image_url']); ?>" alt="<?php echo htmlspecialchars($work['title']); ?>" class="max-w-[100px] rounded-lg" data-placeholder="/assets/images/placeholder.png">
+                                        <img src="<?php echo htmlspecialchars($work['image_url']); ?>"
+                                             alt="<?php echo htmlspecialchars($work['title']); ?>"
+                                             class="max-w-[100px] rounded-lg"
+                                             data-placeholder="/assets/images/placeholder.png">
                                     <?php else: ?>
                                         <img src="/assets/images/placeholder.png" alt="Placeholder" class="max-w-[100px] rounded-lg">
                                         <p class="text-red-500 text-sm mt-1">ไม่มีรูปภาพ</p>
                                     <?php endif; ?>
                                 </td>
-                                <td class="p-3"><?php echo htmlspecialchars($work['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($work['list_item1']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($work['list_item2']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($work['list_item3']); ?></td>
-                                <td class="p-3 flex gap-2">
-                                    <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditWorkModal(<?php echo $work['id']; ?>, '<?php echo htmlspecialchars($work['image_url']); ?>', '<?php echo htmlspecialchars($work['title']); ?>', '<?php echo htmlspecialchars($work['list_item1']); ?>', '<?php echo htmlspecialchars($work['list_item2']); ?>', '<?php echo htmlspecialchars($work['list_item3']); ?>')">แก้ไข</button>
-                                    <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteWorkModal(<?php echo $work['id']; ?>)">ลบ</button>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($work['title']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($work['list_item1']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($work['list_item2']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($work['list_item3']); ?></td>
+                                <!-- ปุ่มแก้ไขและลบ -->
+                                <td class="p-3 border border-gray-300 align-middle">
+                                    <div class="flex flex-col items-center gap-1">
+                                        <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                                                onclick="showEditWorkModal(<?php echo $work['id']; ?>, '<?php echo htmlspecialchars($work['image_url']); ?>', '<?php echo htmlspecialchars($work['title']); ?>', '<?php echo htmlspecialchars($work['list_item1']); ?>', '<?php echo htmlspecialchars($work['list_item2']); ?>', '<?php echo htmlspecialchars($work['list_item3']); ?>')">
+                                            แก้ไข
+                                        </button>
+                                        <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
+                                                onclick="showDeleteWorkModal(<?php echo $work['id']; ?>)">
+                                            ลบ
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -190,37 +226,49 @@
             <p class="text-gray-600">ยังไม่มีคอมเมนต์ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="testimonial-table w-full text-left border-collapse">
+                <table class="testimonial-table w-full text-center border-separate border border-gray-300">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">คำพูด (Quote)</th>
-                            <th class="p-3">ข้อความ (Text)</th>
-                            <th class="p-3">ชื่อผู้เขียน</th>
-                            <th class="p-3">ที่อยู่ผู้เขียน</th>
-                            <th class="p-3">รูปภาพ (Avatar)</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-300">ID</th>
+                            <th class="p-3 border border-gray-300">คำพูด (Quote)</th>
+                            <th class="p-3 border border-gray-300">ข้อความ (Text)</th>
+                            <th class="p-3 border border-gray-300">ชื่อผู้เขียน</th>
+                            <th class="p-3 border border-gray-300">ที่อยู่ผู้เขียน</th>
+                            <th class="p-3 border border-gray-300">รูปภาพ (Avatar)</th>
+                            <th class="p-3 border border-gray-300">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['testimonials'] as $testimonial): ?>
                             <tr class="bg-white hover:bg-gray-100 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($testimonial['id']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($testimonial['quote']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($testimonial['text']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($testimonial['author_name']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($testimonial['author_location']); ?></td>
-                                <td class="p-3">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($testimonial['id']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($testimonial['quote']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($testimonial['text']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($testimonial['author_name']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($testimonial['author_location']); ?></td>
+                                <td class="p-3 border border-gray-300">
                                     <?php if (!empty($testimonial['avatar_url'])): ?>
-                                        <img src="<?php echo htmlspecialchars($testimonial['avatar_url']); ?>" alt="<?php echo htmlspecialchars($testimonial['author_name']); ?>" class="max-w-[50px] rounded-full" data-placeholder="/assets/images/placeholder.png">
+                                        <img src="<?php echo htmlspecialchars($testimonial['avatar_url']); ?>"
+                                             alt="<?php echo htmlspecialchars($testimonial['author_name']); ?>"
+                                             class="max-w-[50px] rounded-full"
+                                             data-placeholder="/assets/images/placeholder.png">
                                     <?php else: ?>
                                         <img src="/assets/images/placeholder.png" alt="Placeholder" class="max-w-[50px] rounded-full">
                                         <p class="text-red-500 text-sm mt-1">ไม่มีรูปภาพ</p>
                                     <?php endif; ?>
                                 </td>
-                                <td class="p-3 flex gap-2">
-                                    <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditTestimonialModal(<?php echo $testimonial['id']; ?>, '<?php echo htmlspecialchars($testimonial['quote']); ?>', '<?php echo htmlspecialchars($testimonial['text']); ?>', '<?php echo htmlspecialchars($testimonial['author_name']); ?>', '<?php echo htmlspecialchars($testimonial['author_location']); ?>', '<?php echo htmlspecialchars($testimonial['avatar_url']); ?>')">แก้ไข</button>
-                                    <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteTestimonialModal(<?php echo $testimonial['id']; ?>)">ลบ</button>
+                                <!-- ปุ่มแก้ไขและลบ -->
+                                <td class="p-3 border border-gray-300 align-middle">
+                                    <div class="flex flex-col items-center gap-1">
+                                        <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                                                onclick="showEditTestimonialModal(<?php echo $testimonial['id']; ?>, '<?php echo htmlspecialchars($testimonial['quote']); ?>', '<?php echo htmlspecialchars($testimonial['text']); ?>', '<?php echo htmlspecialchars($testimonial['author_name']); ?>', '<?php echo htmlspecialchars($testimonial['author_location']); ?>', '<?php echo htmlspecialchars($testimonial['avatar_url']); ?>')">
+                                            แก้ไข
+                                        </button>
+                                        <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200"
+                                                onclick="showDeleteTestimonialModal(<?php echo $testimonial['id']; ?>)">
+                                            ลบ
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -636,7 +684,6 @@ document.addEventListener('DOMContentLoaded', function() {
 function showAddLogoModal() {
     document.getElementById('add-logo-modal').classList.remove('hidden');
 }
-
 function hideAddLogoModal() {
     document.getElementById('add-logo-modal').classList.add('hidden');
 }
@@ -648,7 +695,6 @@ function showEditLogoModal(id, image_url, alt_text) {
     document.getElementById('edit-logo-alt_text').value = alt_text;
     document.getElementById('edit-logo-modal').classList.remove('hidden');
 }
-
 function hideEditLogoModal() {
     document.getElementById('edit-logo-modal').classList.add('hidden');
 }
@@ -658,7 +704,6 @@ function showDeleteLogoModal(id) {
     document.getElementById('delete-logo-id').value = id;
     document.getElementById('delete-logo-modal').classList.remove('hidden');
 }
-
 function hideDeleteLogoModal() {
     document.getElementById('delete-logo-modal').classList.add('hidden');
 }
@@ -667,7 +712,6 @@ function hideDeleteLogoModal() {
 function showAddServiceModal() {
     document.getElementById('add-service-modal').classList.remove('hidden');
 }
-
 function hideAddServiceModal() {
     document.getElementById('add-service-modal').classList.add('hidden');
 }
@@ -682,7 +726,6 @@ function showEditServiceModal(id, icon_url, title, list_item1, list_item2, list_
     document.getElementById('edit-service-list_item3').value = list_item3;
     document.getElementById('edit-service-modal').classList.remove('hidden');
 }
-
 function hideEditServiceModal() {
     document.getElementById('edit-service-modal').classList.add('hidden');
 }
@@ -692,7 +735,6 @@ function showDeleteServiceModal(id) {
     document.getElementById('delete-service-id').value = id;
     document.getElementById('delete-service-modal').classList.remove('hidden');
 }
-
 function hideDeleteServiceModal() {
     document.getElementById('delete-service-modal').classList.add('hidden');
 }
@@ -701,7 +743,6 @@ function hideDeleteServiceModal() {
 function showAddWorkModal() {
     document.getElementById('add-work-modal').classList.remove('hidden');
 }
-
 function hideAddWorkModal() {
     document.getElementById('add-work-modal').classList.add('hidden');
 }
@@ -716,7 +757,6 @@ function showEditWorkModal(id, image_url, title, list_item1, list_item2, list_it
     document.getElementById('edit-work-list_item3').value = list_item3;
     document.getElementById('edit-work-modal').classList.remove('hidden');
 }
-
 function hideEditWorkModal() {
     document.getElementById('edit-work-modal').classList.add('hidden');
 }
@@ -726,7 +766,6 @@ function showDeleteWorkModal(id) {
     document.getElementById('delete-work-id').value = id;
     document.getElementById('delete-work-modal').classList.remove('hidden');
 }
-
 function hideDeleteWorkModal() {
     document.getElementById('delete-work-modal').classList.add('hidden');
 }
@@ -735,7 +774,6 @@ function hideDeleteWorkModal() {
 function showAddTestimonialModal() {
     document.getElementById('add-testimonial-modal').classList.remove('hidden');
 }
-
 function hideAddTestimonialModal() {
     document.getElementById('add-testimonial-modal').classList.add('hidden');
 }
@@ -750,7 +788,6 @@ function showEditTestimonialModal(id, quote, text, author_name, author_location,
     document.getElementById('edit-testimonial-avatar_url').value = avatar_url;
     document.getElementById('edit-testimonial-modal').classList.remove('hidden');
 }
-
 function hideEditTestimonialModal() {
     document.getElementById('edit-testimonial-modal').classList.add('hidden');
 }
@@ -760,7 +797,6 @@ function showDeleteTestimonialModal(id) {
     document.getElementById('delete-testimonial-id').value = id;
     document.getElementById('delete-testimonial-modal').classList.remove('hidden');
 }
-
 function hideDeleteTestimonialModal() {
     document.getElementById('delete-testimonial-modal').classList.add('hidden');
 }
