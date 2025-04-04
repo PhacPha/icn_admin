@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../admin-backup/config/db_connect.php';
+require_once '../admin-backup/config/db_connect.php'; // ปรับ path การเชื่อมต่อฐานข้อมูล
 
 // ตรวจสอบว่าเป็น admin หรือไม่
 if (!isset($_SESSION['admin_id'])) {
@@ -17,9 +17,8 @@ $admin_name = $admin ? $admin['name'] : "Guest";
 // ดึงข้อมูลสรุปสำหรับ Dashboard
 $total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
+$total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
-// เพิ่มการนับ contact_messages
-$total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 // $total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn(); // สำหรับ CTR รวม
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
@@ -139,4 +138,4 @@ switch ($page) {
 
 
 
-<!-- require_once '../admin-backup/config/db_connect.php'; -->
+require_once '../admin-backup/config/db_connect.php';
