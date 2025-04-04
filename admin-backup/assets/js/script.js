@@ -150,3 +150,32 @@ function confirmDelete(message) {
         cancelButtonText: 'ยกเลิก'
     }).then((result) => result.isConfirmed);
 }
+
+// เพิ่มในส่วนท้ายของไฟล์
+function showMessageDetail(id, name, email, subject, message, submitted_at, is_read) {
+    document.getElementById('detail-name').textContent = name;
+    document.getElementById('detail-email').textContent = email;
+    document.getElementById('detail-subject').textContent = subject;
+    document.getElementById('detail-message').textContent = message;
+    document.getElementById('detail-submitted_at').textContent = submitted_at;
+    document.getElementById('message-detail-modal').classList.remove('hidden');
+
+    if (!is_read) {
+        fetch(`index.php?page=contact_messages&action=mark_read&id=${id}`).then(() => {
+            document.querySelector(`tr[data-id="${id}"] .bg-green-500`)?.remove();
+        });
+    }
+}
+
+function hideMessageDetail() {
+    document.getElementById('message-detail-modal').classList.add('hidden');
+}
+
+function showReplyModal(id) {
+    document.getElementById('reply-message-id').value = id;
+    document.getElementById('reply-message-modal').classList.remove('hidden');
+}
+
+function hideReplyModal() {
+    document.getElementById('reply-message-modal').classList.add('hidden');
+}

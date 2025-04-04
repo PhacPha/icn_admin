@@ -18,6 +18,8 @@ $admin_name = $admin ? $admin['name'] : "Guest";
 $total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
+// เพิ่มการนับ contact_messages
+$total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 // $total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn(); // สำหรับ CTR รวม
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
@@ -110,6 +112,19 @@ switch ($page) {
             die("Error: ไม่พบไฟล์ content_management.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
         }
         include 'views/content_management.php';
+        break;
+    case 'contact_messages': // เพิ่ม case ใหม่สำหรับ contact_messages
+        if (!file_exists('controllers/ContactMessagesController.php')) {
+            die("Error: ไม่พบไฟล์ ContactMessagesController.php ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
+        }
+        include 'controllers/ContactMessagesController.php';
+        $contactMessagesController = new ContactMessagesController();
+        $contactMessagesController->manage();
+
+        if (!file_exists('views/contact_messages.php')) {
+            die("Error: ไม่พบไฟล์ contact_messages.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
+        }
+        include 'views/contact_messages.php';
         break;
     default:
         echo "404 - Page Not Found";
