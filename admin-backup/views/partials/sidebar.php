@@ -25,6 +25,11 @@
                 </a>
             </li>
             <li class="mb-4">
+                <a href="index.php?page=contact_messages" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+                    <i class="fas fa-envelope"></i> Contact Messages
+                </a>
+            </li>
+            <li class="mb-4">
                 <a href="../logout.php" class="flex items-center gap-3 p-3">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
