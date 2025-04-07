@@ -13,7 +13,7 @@
     <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">Manage logo</h2>
-            <button onclick="showAddLogoModal()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
+            <button onclick="showAddLogoModal()" class=" bg-green-500  text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
                 เพิ่มโลโก้
             </button>
         </div>
@@ -75,7 +75,7 @@
     <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">จัดการบริการ</h2>
-            <button onclick="showAddServiceModal()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
+            <button onclick="showAddServiceModal()" class="bg-green-500  text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
                 เพิ่มบริการ
             </button>
         </div>
@@ -143,7 +143,7 @@
     <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">จัดการผลงาน (SomeWorks)</h2>
-            <button onclick="showAddWorkModal()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
+            <button onclick="showAddWorkModal()" class="bg-green-500  text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
                 เพิ่มผลงาน
             </button>
         </div>
@@ -211,7 +211,7 @@
     <div class="card bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-2xl font-semibold text-gray-800">จัดการคอมเมนต์ (Testimonials)</h2>
-            <button onclick="showAddTestimonialModal()" class="bg-gradient-to-r from-green-500 to-blue-500 text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
+            <button onclick="showAddTestimonialModal()" class="bg-green-500  text-white p-2 rounded-lg hover:from-green-600 hover:to-blue-600 transition duration-300 ease-in-out">
                 เพิ่มคอมเมนต์
             </button>
         </div>

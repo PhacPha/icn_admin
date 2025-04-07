@@ -19,6 +19,8 @@ $total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
 $total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
+// เพิ่มการนับ contact_messages
+$total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 // $total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn(); // สำหรับ CTR รวม
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
@@ -41,7 +43,6 @@ $manufacturer_data = [
     'VanArsdel' => array_fill(0, 12, 0)
 ];
 $months = ['Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'];
-// $stmt = $pdo->query("SELECT manufacturer, month, units FROM manufacturer_units WHERE month IN ('Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14')");
 while ($row = $stmt->fetch()) {
     $month_index = array_search($row['month'], $months);
     if ($month_index !== false) {
@@ -112,7 +113,7 @@ switch ($page) {
         }
         include 'views/content_management.php';
         break;
-    case 'contact_messages': // เพิ่ม case ใหม่สำหรับ contact_messages
+    case 'contact_messages':
         if (!file_exists('controllers/ContactMessagesController.php')) {
             die("Error: ไม่พบไฟล์ ContactMessagesController.php ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
         }
@@ -124,6 +125,12 @@ switch ($page) {
             die("Error: ไม่พบไฟล์ contact_messages.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
         }
         include 'views/contact_messages.php';
+        break;
+    case 'reply_message': // เพิ่ม case ใหม่
+        if (!file_exists('views/reply_message.php')) {
+            die("Error: ไม่พบไฟล์ reply_message.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
+        }
+        include 'views/reply_message.php';
         break;
     default:
         echo "404 - Page Not Found";
@@ -138,4 +145,4 @@ switch ($page) {
 
 
 
-require_once '../admin-backup/config/db_connect.php';
+<!-- require_once '../admin-backup/config/db_connect.php'; -->
