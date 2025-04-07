@@ -26,6 +26,12 @@ body {
   transition: all 0.3s ease; /* transition-all duration-300 */
 }
 
+.sidebar-logo {
+  justify-content: center;
+  display: block;
+  margin: 0 auto;
+}
+
 /* Sidebar header */
 .sidebar h2 {
   font-size: 1.5rem; /* text-2xl */

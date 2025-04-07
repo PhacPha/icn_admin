@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Generation Time: Apr 07, 2025 at 07:37 AM
+=======
+-- Generation Time: Apr 04, 2025 at 08:03 AM
+>>>>>>> origin/contact-page
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -84,16 +88,25 @@ CREATE TABLE `contact_messages` (
   `email` varchar(100) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
+<<<<<<< HEAD
   `submitted_at` datetime DEFAULT current_timestamp(),
   `is_read` tinyint(1) DEFAULT 0
+=======
+  `submitted_at` datetime DEFAULT current_timestamp()
+>>>>>>> origin/contact-page
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_messages`
 --
 
+<<<<<<< HEAD
 INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `submitted_at`, `is_read`) VALUES
 (22, 'Kittiphat Suwannasri', 'kittiphat240449@gmail.com', 'นี่เป็นการเทสครั้งที่ 100', 'สวัสดีนี่เป็นการเทสครับที่ 100 100ล้านน่ะ', '2025-04-07 03:40:49', 0);
+=======
+INSERT INTO `contact_messages` (`id`, `name`, `email`, `subject`, `message`, `submitted_at`) VALUES
+(1, 'test', 'test@gmail.com', 'สวัสดี', 'สวัสดี', '2025-04-02 15:54:32');
+>>>>>>> origin/contact-page
 
 -- --------------------------------------------------------
 
@@ -444,7 +457,11 @@ ALTER TABLE `blocks`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
+<<<<<<< HEAD
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+=======
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+>>>>>>> origin/contact-page
 
 --
 -- AUTO_INCREMENT for table `logos`
