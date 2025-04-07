@@ -1,42 +1,42 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<main class="ml-64 p-6 w-full min-h-screen">
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate__animated animate__fadeIn">จัดการหน้า Content</h1>
+<main class="ml-64 p-6 w-full min-h-screen bg-white">
+    <h1 class="text-3xl font-bold text-black mb-6 animate__animated animate__fadeIn">จัดการหน้า Content</h1>
 
     <!-- Blocks -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white dark:bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Blocks</h2>
+            <h2 class="text-2xl font-semibold text-black">จัดการ Blocks</h2>
             <button onclick="showAddBlockModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Block</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Blocks</h3>
+        <h3 class="text-xl font-medium text-black mt-6 mb-3">รายการ Blocks</h3>
         <?php if (empty($GLOBALS['blocks'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Blocks ในระบบ</p>
+            <p class="text-black dark:text-gray-400">ยังไม่มี Blocks ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-collapse bg-white">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">รูปภาพ</th>
-                            <th class="p-3">ชื่อ</th>
-                            <th class="p-3">รายละเอียด 1-3</th>
-                            <th class="p-3">คำอธิบาย</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-300">ID</th>
+                            <th class="p-3 border border-gray-300">รูปภาพ</th>
+                            <th class="p-3 border border-gray-300">ชื่อ</th>
+                            <th class="p-3 border border-gray-300">รายละเอียด 1-3</th>
+                            <th class="p-3 border border-gray-300">คำอธิบาย</th>
+                            <th class="p-3 border border-gray-300">การจัดการ</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($GLOBALS['blocks'] as $block): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($block['id']); ?></td>
-                                <td class="p-3">
+                            <tr class="bg-white hover:bg-gray-50 dark:hover:bg-gray-200 transition-colors duration-200">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($block['id']); ?></td>
+                                <td class="p-3 border border-gray-300">
                                     <img src="<?php echo htmlspecialchars($block['image_url']); ?>" alt="<?php echo htmlspecialchars($block['title']); ?>" class="max-w-[50px] rounded-lg" data-placeholder="/iconnex_thailand_db/img/placeholder.png">
                                 </td>
-                                <td class="p-3"><?php echo htmlspecialchars($block['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($block['detail1'] . ', ' . $block['detail2'] . ', ' . $block['detail3']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($block['description']); ?></td>
-                                <td class="p-3 flex gap-2">
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($block['title']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($block['detail1'] . ', ' . $block['detail2'] . ', ' . $block['detail3']); ?></td>
+                                <td class="p-3 border border-gray-300"><?php echo htmlspecialchars($block['description']); ?></td>
+                                <td class="p-3 border border-gray-300 flex gap-2">
                                     <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditBlockModal(<?php echo $block['id']; ?>, '<?php echo htmlspecialchars($block['image_url']); ?>', '<?php echo htmlspecialchars($block['title']); ?>', '<?php echo htmlspecialchars($block['detail1']); ?>', '<?php echo htmlspecialchars($block['detail2']); ?>', '<?php echo htmlspecialchars($block['detail3']); ?>', '<?php echo htmlspecialchars($block['description']); ?>')">แก้ไข</button>
                                     <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteBlockModal(<?php echo $block['id']; ?>)">ลบ</button>
                                 </td>

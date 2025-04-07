@@ -20,6 +20,7 @@ class DashboardController {
         $total_logos = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM logos")->fetchColumn();
         $total_services = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM services")->fetchColumn();
         $total_works = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM works")->fetchColumn();
+        $total_clicks = $GLOBALS['pdo']->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0; // เพิ่มการดึง total_clicks
 
         include '../views/dashboard.php';
     }

@@ -6,8 +6,8 @@ class HomeServiceController {
         global $pdo;
         $this->pdo = $pdo;
 
-        // ตรวจสอบและสร้างโฟลเดอร์ uploads หากยังไม่มี
-        $uploadDir = __DIR__ . '/../../uploads/';
+        // ตรวจสอบและสร้างโฟลเดอร์ img หากยังไม่มี
+        $uploadDir = __DIR__ . '/../../img/';
         if (!file_exists($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
@@ -110,12 +110,12 @@ class HomeServiceController {
 
             // สร้างชื่อไฟล์ใหม่
             $fileName = uniqid() . '-' . basename($file['name']);
-            $uploadDir = __DIR__ . '/../../uploads/';
+            $uploadDir = __DIR__ . '/../../img/';
             $uploadPath = $uploadDir . $fileName;
 
-            // ย้ายไฟล์ไปยังโฟลเดอร์ uploads
+            // ย้ายไฟล์ไปยังโฟลเดอร์ img
             if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-                return '/uploads/' . $fileName;
+                return '/img/' . $fileName;
             } else {
                 return false;
             }

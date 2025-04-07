@@ -1,42 +1,42 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<main class="ml-64 p-6 w-full min-h-screen">
-    <h1 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 animate__animated animate__fadeIn">จัดการหน้า Services</h1>
+<main class="ml-64 p-6 w-full min-h-screen bg-white text-black">
+    <h1 class="text-3xl font-bold text-black dark:text-black mb-6 animate__animated animate__fadeIn">จัดการหน้า Services</h1>
 
     <!-- Service Cards -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white dark:bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Service Cards</h2>
+            <h2 class="text-2xl font-semibold text-black dark:text-black">จัดการ Service Cards</h2>
             <button onclick="showAddServiceCardModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Service Card</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Service Cards</h3>
+        <h3 class="text-xl font-medium text-black dark:text-black mt-6 mb-3">รายการ Service Cards</h3>
         <?php if (empty($GLOBALS['service_cards'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Service Cards ในระบบ</p>
+            <p class="text-black dark:text-black">ยังไม่มี Service Cards ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-separate border-spacing-0">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">ไอคอน</th>
-                            <th class="p-3">ชื่อ</th>
-                            <th class="p-3">คำอธิบาย</th>
-                            <th class="p-3">รายการ 1-4</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-400">ID</th>
+                            <th class="p-3 border border-gray-400">ไอคอน</th>
+                            <th class="p-3 border border-gray-400">ชื่อ</th>
+                            <th class="p-3 border border-gray-400">คำอธิบาย</th>
+                            <th class="p-3 border border-gray-400">รายการ 1-4</th>
+                            <th class="p-3 border border-gray-400">การจัดการ</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg-white dark:bg-white">
                         <?php foreach ($GLOBALS['service_cards'] as $card): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($card['id']); ?></td>
-                                <td class="p-3">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-200 transition-colors duration-200">
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($card['id']); ?></td>
+                                <td class="p-3 border border-gray-400">
                                     <img src="<?php echo htmlspecialchars($card['icon_url']); ?>" alt="<?php echo htmlspecialchars($card['title']); ?>" class="max-w-[50px] rounded-lg" data-placeholder="/iconnex_thailand_db/img/placeholder.png">
                                 </td>
-                                <td class="p-3"><?php echo htmlspecialchars($card['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($card['description']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($card['list_item1'] . ', ' . $card['list_item2'] . ', ' . $card['list_item3'] . ', ' . $card['list_item4']); ?></td>
-                                <td class="p-3 flex gap-2">
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($card['title']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($card['description']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($card['list_item1'] . ', ' . $card['list_item2'] . ', ' . $card['list_item3'] . ', ' . $card['list_item4']); ?></td>
+                                <td class="p-3 border border-gray-400 flex gap-2">
                                     <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditServiceCardModal(<?php echo $card['id']; ?>, '<?php echo htmlspecialchars($card['icon_url']); ?>', '<?php echo htmlspecialchars($card['title']); ?>', '<?php echo htmlspecialchars($card['description']); ?>', '<?php echo htmlspecialchars($card['list_item1']); ?>', '<?php echo htmlspecialchars($card['list_item2']); ?>', '<?php echo htmlspecialchars($card['list_item3']); ?>', '<?php echo htmlspecialchars($card['list_item4']); ?>')">แก้ไข</button>
                                     <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteServiceCardModal(<?php echo $card['id']; ?>)">ลบ</button>
                                 </td>
@@ -49,32 +49,32 @@
     </div>
 
     <!-- Why Choose Us -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white dark:bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Why Choose Us</h2>
+            <h2 class="text-2xl font-semibold text-black dark:text-black">จัดการ Why Choose Us</h2>
             <button onclick="showAddWhyChooseUsModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Why Choose Us</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Why Choose Us</h3>
+        <h3 class="text-xl font-medium text-black dark:text-black mt-6 mb-3">รายการ Why Choose Us</h3>
         <?php if (empty($GLOBALS['why_choose_us'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Why Choose Us ในระบบ</p>
+            <p class="text-black dark:text-black">ยังไม่มี Why Choose Us ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-separate border-spacing-0">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">ชื่อ</th>
-                            <th class="p-3">คำอธิบาย</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-400">ID</th>
+                            <th class="p-3 border border-gray-400">ชื่อ</th>
+                            <th class="p-3 border border-gray-400">คำอธิบาย</th>
+                            <th class="p-3 border border-gray-400">การจัดการ</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg-white dark:bg-white">
                         <?php foreach ($GLOBALS['why_choose_us'] as $item): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($item['id']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($item['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($item['description']); ?></td>
-                                <td class="p-3 flex gap-2">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-200 transition-colors duration-200">
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($item['id']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($item['title']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($item['description']); ?></td>
+                                <td class="p-3 border border-gray-400 flex gap-2">
                                     <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditWhyChooseUsModal(<?php echo $item['id']; ?>, '<?php echo htmlspecialchars($item['title']); ?>', '<?php echo htmlspecialchars($item['description']); ?>')">แก้ไข</button>
                                     <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteWhyChooseUsModal(<?php echo $item['id']; ?>)">ลบ</button>
                                 </td>
@@ -87,34 +87,34 @@
     </div>
 
     <!-- Work Process -->
-    <div class="card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
+    <div class="card bg-white dark:bg-white p-6 rounded-lg shadow-lg mb-6 animate__animated animate__fadeInUp">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-2xl font-semibold text-gray-800 dark:text-gray-100">จัดการ Work Process</h2>
+            <h2 class="text-2xl font-semibold text-black dark:text-black">จัดการ Work Process</h2>
             <button onclick="showAddWorkProcessModal()" class="bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 transition-colors duration-200">เพิ่ม Work Process</button>
         </div>
-        <h3 class="text-xl font-medium text-gray-700 dark:text-gray-200 mt-6 mb-3">รายการ Work Process</h3>
+        <h3 class="text-xl font-medium text-black dark:text-black mt-6 mb-3">รายการ Work Process</h3>
         <?php if (empty($GLOBALS['work_process'])): ?>
-            <p class="text-gray-600 dark:text-gray-400">ยังไม่มี Work Process ในระบบ</p>
+            <p class="text-black dark:text-black">ยังไม่มี Work Process ในระบบ</p>
         <?php else: ?>
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left border-separate border-spacing-0">
                     <thead>
                         <tr class="bg-gray-800 text-white">
-                            <th class="p-3">ID</th>
-                            <th class="p-3">ขั้นตอน</th>
-                            <th class="p-3">ชื่อ</th>
-                            <th class="p-3">คำอธิบาย</th>
-                            <th class="p-3">การจัดการ</th>
+                            <th class="p-3 border border-gray-400">ID</th>
+                            <th class="p-3 border border-gray-400">ขั้นตอน</th>
+                            <th class="p-3 border border-gray-400">ชื่อ</th>
+                            <th class="p-3 border border-gray-400">คำอธิบาย</th>
+                            <th class="p-3 border border-gray-400">การจัดการ</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="bg-white dark:bg-white">
                         <?php foreach ($GLOBALS['work_process'] as $process): ?>
-                            <tr class="bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">
-                                <td class="p-3"><?php echo htmlspecialchars($process['id']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($process['step']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($process['title']); ?></td>
-                                <td class="p-3"><?php echo htmlspecialchars($process['description']); ?></td>
-                                <td class="p-3 flex gap-2">
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-200 transition-colors duration-200">
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($process['id']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($process['step']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($process['title']); ?></td>
+                                <td class="p-3 border border-gray-400"><?php echo htmlspecialchars($process['description']); ?></td>
+                                <td class="p-3 border border-gray-400 flex gap-2">
                                     <button class="bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors duration-200" onclick="showEditWorkProcessModal(<?php echo $process['id']; ?>, '<?php echo htmlspecialchars($process['step']); ?>', '<?php echo htmlspecialchars($process['title']); ?>', '<?php echo htmlspecialchars($process['description']); ?>')">แก้ไข</button>
                                     <button class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200" onclick="showDeleteWorkProcessModal(<?php echo $process['id']; ?>)">ลบ</button>
                                 </td>

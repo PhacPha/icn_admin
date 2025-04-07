@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../admin-backup/config/db_connect.php';
+require_once '../admin-backup/config/db_connect.php'; // ปรับ path การเชื่อมต่อฐานข้อมูล
 
 // ตรวจสอบว่าเป็น admin หรือไม่
 if (!isset($_SESSION['admin_id'])) {
@@ -17,8 +17,12 @@ $admin_name = $admin ? $admin['name'] : "Guest";
 // ดึงข้อมูลสรุปสำหรับ Dashboard
 $total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
+$total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
 $total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
+
+// เพิ่มการดึงข้อมูล total_clicks
+$total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0; // ถ้าไม่มีข้อมูลให้เป็น 0
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
 $social_posts = [
@@ -123,7 +127,7 @@ switch ($page) {
         }
         include 'views/contact_messages.php';
         break;
-    case 'reply_message': // เพิ่ม case ใหม่
+    case 'reply_message':
         if (!file_exists('views/reply_message.php')) {
             die("Error: ไม่พบไฟล์ reply_message.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
         }
