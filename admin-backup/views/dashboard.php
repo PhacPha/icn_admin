@@ -16,10 +16,10 @@
             <h3 class="text-lg font-semibold">จำนวน Logos</h3>
             <p class="text-2xl font-bold"><?php echo number_format($total_logos); ?> <span class="text-green-500 text-sm">+11.01% ↗</span></p>
         </div>
-        <!-- CTR รวม -->
+        <!-- จำนวนการเข้าชม -->
         <div class="stat-card bg-white p-4 rounded-lg shadow">
-            <h3 class="text-lg font-semibold">CTR รวม</h3>
-            <p class="text-2xl font-bold"><?php echo number_format($total_clicks); ?> <span class="text-green-500 text-sm">+11.01% ↗</span></p>
+            <h3 class="text-lg font-semibold">จำนวนการเข้าชม</h3>
+            <p class="text-2xl font-bold"><?php echo number_format($total_visits); ?> <span class="text-green-500 text-sm">+11.01% ↗</span></p>
         </div>
         <!-- จำนวน Works -->
         <div class="stat-card bg-white p-4 rounded-lg shadow">

@@ -29,7 +29,7 @@
                     <tbody id="messages-table">
                         <?php foreach ($GLOBALS['contact_messages'] as $message): ?>
                             <!-- เพิ่ม border-b ให้แต่ละแถว -->
-                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200 border-b border-gray-300">
+                            <tr class="bg-white hover:bg-gray-100 transition-colors duration-200 border-b border-gray-300" data-id="<?php echo $message['id']; ?>">
                                 <td class="p-3 border-r border-gray-300">
                                     <?php echo htmlspecialchars($message['name']); ?>
                                 </td>
@@ -125,6 +125,24 @@
             </form>
         </div>
     </div>
+
+    <!-- Modal สำหรับยืนยันการลบ -->
+    <div id="delete-modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-xl font-medium text-gray-700 mb-4">ยืนยันการลบ</h3>
+            <p class="text-gray-600 mb-4">คุณแน่ใจหรือว่าต้องการลบข้อความนี้?</p>
+            <div class="flex gap-2">
+                <button id="confirm-delete-btn" 
+                        class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors duration-200 flex-1">
+                    ลบ
+                </button>
+                <button onclick="hideDeleteModal()" 
+                        class="bg-gray-500 text-white p-2 rounded-lg hover:bg-gray-600 transition-colors duration-200 flex-1">
+                    ยกเลิก
+                </button>
+            </div>
+        </div>
+    </div>
 </main>
 
 <script>
@@ -163,6 +181,41 @@ function showReplyModal(id) {
 function hideReplyModal() {
     document.getElementById('reply-message-modal').classList.add('hidden');
 }
+
+// ส่วนของ Modal ลบข้อความ
+let deleteMessageId = null;
+let deleteMessageTable = null;
+
+function showDeleteModal(id, table) {
+    deleteMessageId = id;
+    deleteMessageTable = table;
+    document.getElementById('delete-modal').classList.remove('hidden');
+}
+
+function hideDeleteModal() {
+    document.getElementById('delete-modal').classList.add('hidden');
+    deleteMessageId = null;
+    deleteMessageTable = null;
+}
+
+document.getElementById('confirm-delete-btn').addEventListener('click', function() {
+    if (deleteMessageId && deleteMessageTable) {
+        // ส่งคำร้องการลบ (สามารถปรับเปลี่ยนเป็น method POST ได้ตามต้องการ)
+        fetch(`index.php?page=${deleteMessageTable}&action=delete&id=${deleteMessageId}`, {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(data => {
+            // หลังลบแล้ว สามารถรีเฟรชรายการข้อความได้
+            hideDeleteModal();
+            fetchMessages();
+        })
+        .catch(error => {
+            console.error('Error deleting message:', error);
+            hideDeleteModal();
+        });
+    }
+});
 
 // อัปเดตข้อความแบบเรียลไทม์
 function fetchMessages() {
