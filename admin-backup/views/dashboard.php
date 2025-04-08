@@ -12,7 +12,11 @@ for ($i = $days - 1; $i >= 0; $i--) {
     $labels[] = date('d M', strtotime($date));
 }
 
-$stmt = $GLOBALS['pdo']->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+$stmt = $GLOBALS['pdo']->prepare("
+    SELECT click_date, click_count 
+    FROM clicks 
+    WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
+");
 $stmt->execute([$days]);
 $clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -26,201 +30,182 @@ foreach ($labels as $index => $label) {
             break;
         }
     }
-    if (!$found) {
+    if (! $found) {
         $click_data[] = 0;
     }
 }
 ?>
 
-<main class="main-content w-full p-6">
-    <h1 class="text-2xl font-bold mb-4">Dash Board</h1>
+<main class="main-content w-full px-6 py-6">
+  <h1 class="text-2xl font-bold mb-6">Dash Board</h1>
 
-    <!-- ส่วนซ้าย-ขวาที่ต้องการคงสัดส่วน 3/4 : 1/4 หรือจะเปลี่ยนตามชอบ -->
-    <div class="flex flex-col md:flex-row gap-4 w-full">
-        <!-- คอลัมน์ซ้าย -->
-        <div class="w-full md:w-3/4">
-            <!-- Stats Section -->
-            <div class="stats grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <!-- จำนวน Admins -->
-                <div class="stat-card bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold">จำนวน Admins</h3>
-                    <p class="text-2xl font-bold">
-                        <?php echo number_format($total_admins); ?> 
-                        <span class="text-green-500 text-sm">+11.01% ↗</span>
-                    </p>
-                </div>
-                <!-- จำนวน Logos -->
-                <div class="stat-card bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold">จำนวน Logos</h3>
-                    <p class="text-2xl font-bold">
-                        <?php echo number_format($total_logos); ?> 
-                        <span class="text-green-500 text-sm">+11.01% ↗</span>
-                    </p>
-                </div>
-                <!-- จำนวนการเข้าชม -->
-                <div class="stat-card bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold">จำนวนการเข้าชม</h3>
-                    <p class="text-2xl font-bold">
-                        <?php echo number_format($total_clicks); ?> 
-                        <span class="text-green-500 text-sm">+11.01% ↗</span>
-                    </p>
-                </div>
-                <!-- จำนวน Works -->
-                <div class="stat-card bg-white p-4 rounded-lg shadow">
-                    <h3 class="text-lg font-semibold">จำนวน Works</h3>
-                    <p class="text-2xl font-bold">
-                        <?php echo number_format($total_works); ?> 
-                        <span class="text-green-500 text-sm">+11.01% ↗</span>
-                    </p>
-                </div>
-            </div>
+  <!-- Stats Section: 4 small cards at top -->
+  <div class="stats grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8 w-full">
+    <div class="bg-white p-4 rounded-lg shadow w-full">
+      <h3 class="text-lg font-semibold">จำนวน Admins</h3>
+      <p class="text-2xl font-bold">
+        <?= number_format($total_admins) ?>
+        <span class="text-green-500 text-sm">+11.01% ↗</span>
+      </p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow w-full">
+      <h3 class="text-lg font-semibold">จำนวน Logos</h3>
+      <p class="text-2xl font-bold">
+        <?= number_format($total_logos) ?>
+        <span class="text-green-500 text-sm">+11.01% ↗</span>
+      </p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow w-full">
+      <h3 class="text-lg font-semibold">CTR รวม</h3>
+      <p class="text-2xl font-bold">
+        <?= number_format($total_clicks) ?>
+        <span class="text-green-500 text-sm">+11.01% ↗</span>
+      </p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow w-full">
+      <h3 class="text-lg font-semibold">จำนวน Works</h3>
+      <p class="text-2xl font-bold">
+        <?= number_format($total_works) ?>
+        <span class="text-green-500 text-sm">+11.01% ↗</span>
+      </p>
+    </div>
+  </div>
 
-            <!-- Social Media Posts Section -->
-            <div class="social-stats bg-white p-4 rounded-lg shadow mb-6">
-                <h3 class="text-lg font-semibold mb-4">จำนวนโพสต์ในโซเชียล</h3>
-                <table class="w-full text-left">
-                    <thead>
-                        <tr>
-                            <th class="p-2">แพลตฟอร์ม</th>
-                            <th class="p-2">จำนวนโพสต์</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="p-2 flex items-center">
-                                <i class="fab fa-facebook-f mr-2"></i> Facebook
-                            </td>
-                            <td class="p-2">
-                                <?php echo $social_posts['Facebook']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 flex items-center">
-                                <i class="fab fa-instagram mr-2"></i> Instagram
-                            </td>
-                            <td class="p-2">
-                                <?php echo $social_posts['Instagram']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 flex items-center">
-                                <i class="fab fa-youtube mr-2"></i> YouTube
-                            </td>
-                            <td class="p-2">
-                                <?php echo $social_posts['YouTube']; ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="p-2 flex items-center">
-                                <i class="fab fa-line mr-2"></i> Line
-                            </td>
-                            <td class="p-2">
-                                <?php echo $social_posts['Line']; ?>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+  <!-- Two-column layout below stats -->
+  <div class="flex flex-col lg:flex-row gap-6 w-full">
+
+    <!-- Left column: Social + Chart -->
+    <div class="flex-1 space-y-6 w-full">
+      <!-- Social Media Posts Section -->
+      <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
+        <h3 class="text-lg font-semibold mb-4">จำนวนโพสต์ในโซเชียล</h3>
+        <table class="min-w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2 px-3">แพลตฟอร์ม</th>
+              <th class="py-2 px-3">จำนวนโพสต์</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach (['Facebook','Instagram','YouTube','Line'] as $pf): ?>
+            <tr class="hover:bg-gray-50">
+              <td class="py-2 px-3 flex items-center">
+                <i class="fab fa-<?= strtolower($pf) ?> mr-2"></i><?= $pf ?>
+              </td>
+              <td class="py-2 px-3"><?= $social_posts[$pf] ?? 0 ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Clicks Chart Section -->
+      <div class="bg-white p-4 rounded-lg shadow w-full">
+        <h3 class="text-lg font-semibold mb-4">จำนวนคลิกต่อวัน (7 วันล่าสุด)</h3>
+        <div class="w-full h-64">
+          <canvas id="clicksChart"></canvas>
         </div>
-
-        <!-- คอลัมน์ขวา -->
-        <div class="w-full md:w-1/4 flex flex-col gap-4">
-            <!-- บล็อคบน -->
-            <div class="bg-white p-4 rounded-lg shadow">
-                <p>Block 1: เนื้อหาบล็อคแรก</p>
-            </div>
-            <!-- บล็อคกลาง -->
-            <div class="bg-white p-4 rounded-lg shadow">
-                <p>Block 2: เนื้อหาบล็อคกลาง</p>
-            </div>
-            <!-- บล็อคที่สาม -->
-            <div class="bg-white p-4 rounded-lg shadow">
-                <p>Block 3: เนื้อหาบล็อคที่สาม</p>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <!-- Chart Section -->
-    <div class="chart bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-4">Total Units by Month and Manufacturer</h3>
-        <canvas id="unitsChart" height="100"></canvas>
+    <!-- Right column: Countries, Devices, Online Users -->
+    <div class="w-full lg:w-1/3 flex flex-col gap-6">
+      <!-- Countries Visiting Section -->
+      <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
+        <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
+        <table class="min-w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2 px-3">ประเทศ</th>
+              <th class="py-2 px-3">จำนวนการเข้าชม</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="py-2 px-3">ยังไม่มีข้อมูล</td>
+              <td class="py-2 px-3">0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Devices Used Section -->
+      <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
+        <h3 class="text-lg font-semibold mb-4">อุปกรณ์ที่เข้าชม</h3>
+        <table class="min-w-full text-left">
+          <thead>
+            <tr class="border-b">
+              <th class="py-2 px-3">ประเภทอุปกรณ์</th>
+              <th class="py-2 px-3">จำนวนการใช้งาน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php if (!empty($device_stats)): ?>
+              <?php foreach ($device_stats as $dev => $cnt): ?>
+              <tr class="hover:bg-gray-50">
+                <td class="py-2 px-3"><?= htmlspecialchars($dev) ?></td>
+                <td class="py-2 px-3"><?= number_format($cnt) ?></td>
+              </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td class="py-2 px-3">ยังไม่มีข้อมูล</td>
+                <td class="py-2 px-3">0</td>
+              </tr>
+            <?php endif; ?>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Current Online Users Section -->
+      <div class="bg-white p-4 rounded-lg shadow text-center w-full">
+        <h3 class="text-lg font-semibold mb-3">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
+        <p class="text-2xl font-bold">0 <span class="text-gray-500 text-sm">ผู้ใช้</span></p>
+      </div>
     </div>
 
+  </div>
 </main>
 
-<!-- Include Chart.js for the graph -->
+<?php include 'partials/footer.php'; ?>
+
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('clicksChart').getContext('2d');
-    const clicksChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'],
-            datasets: [
-                {
-                    label: 'Aliqui',
-                    data: <?php echo json_encode($manufacturer_data['Aliqui']); ?>,
-                    borderColor: '#00C4B4',
-                    fill: false
-                },
-                {
-                    label: 'Natura',
-                    data: <?php echo json_encode($manufacturer_data['Natura']); ?>,
-                    borderColor: '#FF6B6B',
-                    fill: false
-                },
-                {
-                    label: 'Pirum',
-                    data: <?php echo json_encode($manufacturer_data['Pirum']); ?>,
-                    borderColor: '#4A90E2',
-                    fill: false
-                },
-                {
-                    label: 'VanArsdel',
-                    data: <?php echo json_encode($manufacturer_data['VanArsdel']); ?>,
-                    borderColor: '#FFD700',
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'จำนวนคลิก'
-                    }
-                },
-                x: {
-                    title: {
-                        display: true,
-                        text: 'วันที่'
-                    }
-                }
-            },
-            plugins: {
-                legend: {
-                    display: true,
-                    position: 'top'
-                },
-                tooltip: {
-                    callbacks: {
-                        label: function(context) {
-                            return `${context.dataset.label}: ${context.raw} คลิก`;
-                        }
-                    }
-                }
-            }
+  const ctx = document.getElementById('clicksChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <?= json_encode($labels) ?>,
+      datasets: [{
+        label: 'จำนวนคลิก',
+        data: <?= json_encode($click_data) ?>,
+        borderColor: 'rgba(74,144,226,1)',
+        backgroundColor: 'rgba(74,144,226,0.2)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#fff',
+        pointBorderColor: 'rgba(74,144,226,1)',
+        pointBorderWidth: 2,
+        pointRadius: 4
+      }]
+    },
+    options: {
+      maintainAspectRatio: false,
+      responsive: true,
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'จำนวนคลิก' } },
+        x: { title: { display: true, text: 'วันที่' } }
+      },
+      plugins: {
+        legend: { display: true, position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ${ctx.raw} คลิก`
+          }
         }
-    });
+      }
+    }
+  });
 </script>
-
-<!-- เพิ่มส่วนนี้ใน dashboard.php เพื่อ debug -->
-<script>
-    console.log('Labels:', <?php echo json_encode($labels); ?>);
-    console.log('Click Data:', <?php echo json_encode($click_data); ?>);
-</script>
-
-<?php include 'partials/footer.php'; ?>
+ 

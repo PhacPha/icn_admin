@@ -1,28 +1,77 @@
 <?php
 session_start();
-// require_once '../admin-backup/config/db_connect.php';
-require_once '../config/db_connect.php'; 
 
-class DashboardController {
-    public function index() {
+// โหลดไฟล์เชื่อมต่อฐานข้อมูล
+require_once '../config/db_connect.php';
+
+class DashboardController
+{
+    public function index()
+    {
+        // ตรวจสอบว่ามี admin_id ใน session หรือไม่
         if (!isset($_SESSION['admin_id'])) {
             header("Location: login.php");
             exit();
         }
 
-        // ดึงชื่อ Admin จากตาราง admins
+        // ดึงชื่อ Admin จากตาราง admins ตาม session admin_id
         $stmt = $GLOBALS['pdo']->prepare("SELECT name FROM admins WHERE id = ?");
         $stmt->execute([$_SESSION['admin_id']]);
         $admin = $stmt->fetch();
         $admin_name = $admin ? $admin['name'] : "Guest";
 
-        // ดึงข้อมูลสรุปจากตารางต่างๆ
+        // ดึงข้อมูลสรุปจากตารางต่าง ๆ
         $total_admins = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM admins")->fetchColumn();
         $total_logos = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM logos")->fetchColumn();
         $total_services = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM services")->fetchColumn();
         $total_works = $GLOBALS['pdo']->query("SELECT COUNT(*) FROM works")->fetchColumn();
-        $total_clicks = $GLOBALS['pdo']->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0; // เพิ่มการดึง total_clicks
+        $total_clicks = $GLOBALS['pdo']->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0;
 
+        // เตรียมข้อมูลสำหรับกราฟคลิก (7 วันล่าสุด)
+        $days = 7;
+        $click_data = [];
+        $labels = [];
+
+        // สร้าง label ของวันที่ย้อนหลัง 7 วัน (เช่น "07 Apr")
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-$i days"));
+            $labels[] = date('d M', strtotime($date));
+        }
+
+        // ดึงข้อมูลคลิกในช่วง 7 วันที่ผ่านมา
+        $stmt = $GLOBALS['pdo']->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+        $stmt->execute([$days]);
+        $clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // เติมข้อมูลคลิกใน array: ถ้าวันไหนไม่มีข้อมูลให้เป็น 0
+        foreach ($labels as $index => $label) {
+            $date = date('Y-m-d', strtotime("-$index days"));
+            $found = false;
+            foreach ($clicks as $click) {
+                if ($click['click_date'] === $date) {
+                    $click_data[] = (int)$click['click_count'];
+                    $found = true;
+                    break;
+                }
+            }
+            if (!$found) {
+                $click_data[] = 0;
+            }
+        }
+
+        // ดึงข้อมูลสถิติอุปกรณ์จากตาราง device_logs (สมมุติว่ามีฟิลด์ 'device')
+        // ผลลัพธ์จะได้เป็น array แบบ key => value (เช่น 'Desktop' => 120)
+        $stmt = $GLOBALS['pdo']->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
+        $device_stats = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+        // หาก PHP version ของคุณไม่รองรับ PDO::FETCH_KEY_PAIR ให้ใช้วิธีด้านล่างแทน:
+        /*
+        $device_stats = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $device_stats[$row['device']] = $row['total'];
+        }
+        */
+
+        // ส่งตัวแปรทั้งหมดไปยัง View
         include '../views/dashboard.php';
     }
 }

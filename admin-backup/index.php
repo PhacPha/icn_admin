@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../admin-backup/config/db_connect.php'; // ปรับ path การเชื่อมต่อฐานข้อมูล
+require_once '../admin-backup/config/db_connect.php'; // ปรับ path การเชื่อมต่อฐานข้อมูลตามโปรเจกต์ของคุณ
 
 // ตรวจสอบว่าเป็น admin หรือไม่
 if (!isset($_SESSION['admin_id'])) {
@@ -34,11 +34,12 @@ while ($row = $stmt->fetch()) {
     $social_posts[$row['platform']] = $row['post_count'];
 }
 
-// ดึงข้อมูลสำหรับกราฟคลิก
+// ดึงข้อมูลสำหรับกราฟคลิก (7 วันล่าสุด)
 $days = 7;
 $click_data = [];
 $labels = [];
 
+// สร้าง label สำหรับวันที่ย้อนหลัง 7 วัน (เช่น "07 Apr")
 for ($i = $days - 1; $i >= 0; $i--) {
     $date = date('Y-m-d', strtotime("-$i days"));
     $labels[] = date('d M', strtotime($date));
@@ -63,7 +64,22 @@ foreach ($labels as $index => $label) {
     }
 }
 
-// Routing ตามหน้า
+// *** ดึงข้อมูลสถิติอุปกรณ์ (Devices Used) ***
+// สมมุติว่ามีตาราง device_logs ที่มีฟิลด์ 'device'
+$stmt = $pdo->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
+// หาก PHP ของคุณรองรับ PDO::FETCH_KEY_PAIR (PHP 7.4 ขึ้นไป)
+// คุณสามารถใช้แบบนี้:
+$device_stats = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+// ถ้าไม่รองรับ ให้ใช้วิธีแบบ loop ดังนี้:
+/*
+$device_stats = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $device_stats[$row['device']] = $row['total'];
+}
+*/
+
+// Routing ตามหน้า (controller และ view ต่าง ๆ)
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 switch ($page) {
@@ -124,7 +140,7 @@ switch ($page) {
         $contentManagementController->manage();
 
         if (!file_exists('views/content_management.php')) {
-            die("Error: ไม่พบไฟล์ content_management.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
+            die("Error: ไม่พบไฟล์ content_management.php ในโฟลded /iconnex_thailand_db/views/");
         }
         include 'views/content_management.php';
         break;
