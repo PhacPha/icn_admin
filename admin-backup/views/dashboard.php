@@ -1,6 +1,37 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
+<?php
+// ดึงข้อมูลสำหรับกราฟคลิก
+$days = 7;
+$click_data = [];
+$labels = [];
+
+for ($i = $days - 1; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $labels[] = date('d M', strtotime($date));
+}
+
+$stmt = $GLOBALS['pdo']->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+$stmt->execute([$days]);
+$clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($labels as $index => $label) {
+    $date = date('Y-m-d', strtotime("-$index days"));
+    $found = false;
+    foreach ($clicks as $click) {
+        if ($click['click_date'] === $date) {
+            $click_data[] = (int)$click['click_count'];
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $click_data[] = 0;
+    }
+}
+?>
+
 <main class="main-content w-full p-6">
     <h1 class="text-2xl font-bold mb-4">Dash Board</h1>
 
@@ -109,24 +140,22 @@
         </div>
     </div>
 
-    <!-- Chart Section แยกออกมาให้อยู่คนละส่วน เพื่อให้กินพื้นที่เต็มความกว้าง -->
-    <div class="chart bg-white p-4 rounded-lg shadow mt-4 w-full">
+    <!-- Chart Section -->
+    <div class="chart bg-white p-4 rounded-lg shadow">
         <h3 class="text-lg font-semibold mb-4">Total Units by Month and Manufacturer</h3>
         <canvas id="unitsChart" height="100"></canvas>
     </div>
+
 </main>
 
 <!-- Include Chart.js for the graph -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('unitsChart').getContext('2d');
-    const unitsChart = new Chart(ctx, {
+    const ctx = document.getElementById('clicksChart').getContext('2d');
+    const clicksChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [
-                'Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 
-                'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'
-            ],
+            labels: ['Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'],
             datasets: [
                 {
                     label: 'Aliqui',
@@ -159,11 +188,39 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 2000
+                    title: {
+                        display: true,
+                        text: 'จำนวนคลิก'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'วันที่'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw} คลิก`;
+                        }
+                    }
                 }
             }
         }
     });
+</script>
+
+<!-- เพิ่มส่วนนี้ใน dashboard.php เพื่อ debug -->
+<script>
+    console.log('Labels:', <?php echo json_encode($labels); ?>);
+    console.log('Click Data:', <?php echo json_encode($click_data); ?>);
 </script>
 
 <?php include 'partials/footer.php'; ?>
