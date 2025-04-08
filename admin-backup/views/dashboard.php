@@ -1,6 +1,37 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
+<?php
+// ดึงข้อมูลสำหรับกราฟคลิก
+$days = 7;
+$click_data = [];
+$labels = [];
+
+for ($i = $days - 1; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $labels[] = date('d M', strtotime($date));
+}
+
+$stmt = $GLOBALS['pdo']->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+$stmt->execute([$days]);
+$clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($labels as $index => $label) {
+    $date = date('Y-m-d', strtotime("-$index days"));
+    $found = false;
+    foreach ($clicks as $click) {
+        if ($click['click_date'] === $date) {
+            $click_data[] = (int)$click['click_count'];
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $click_data[] = 0;
+    }
+}
+?>
+
 <main class="main-content p-6">
     <h1 class="text-2xl font-bold mb-4">Dash Board</h1>
 
@@ -60,57 +91,116 @@
     </div>
 
     <!-- Chart Section -->
-    <div class="chart bg-white p-4 rounded-lg shadow">
-        <h3 class="text-lg font-semibold mb-4">Total Units by Month and Manufacturer</h3>
-        <canvas id="unitsChart" height="100"></canvas>
+    <div class="chart bg-white p-4 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold mb-4">จำนวนคลิกต่อวัน (7 วันล่าสุด)</h3>
+        <canvas id="clicksChart" height="100"></canvas>
     </div>
+
+    <!-- Countries Visiting Section -->
+    <div class="countries-stats bg-white p-4 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
+        <table class="w-full text-left">
+            <thead>
+                <tr>
+                    <th class="p-2">ประเทศ</th>
+                    <th class="p-2">จำนวนการเข้าชม</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-2">ยังไม่มีข้อมูล</td>
+                    <td class="p-2">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Devices Used Section -->
+    <div class="devices-stats bg-white p-4 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold mb-4">อุปกรณ์ที่เข้าชม</h3>
+        <table class="w-full text-left">
+            <thead>
+                <tr>
+                    <th class="p-2">ประเภทอุปกรณ์</th>
+                    <th class="p-2">จำนวนการใช้งาน</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="p-2">ยังไม่มีข้อมูล</td>
+                    <td class="p-2">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Current Online Users Section -->
+    <div class="online-users bg-white p-4 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold mb-4">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
+        <p class="text-2xl font-bold">0 <span class="text-gray-500 text-sm">ผู้ใช้</span></p>
+    </div>
+
 </main>
 
 <!-- Include Chart.js for the graph -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('unitsChart').getContext('2d');
-    const unitsChart = new Chart(ctx, {
+    const ctx = document.getElementById('clicksChart').getContext('2d');
+    const clicksChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ['Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'],
-            datasets: [
-                {
-                    label: 'Aliqui',
-                    data: <?php echo json_encode($manufacturer_data['Aliqui']); ?>,
-                    borderColor: '#00C4B4',
-                    fill: false
-                },
-                {
-                    label: 'Natura',
-                    data: <?php echo json_encode($manufacturer_data['Natura']); ?>,
-                    borderColor: '#FF6B6B',
-                    fill: false
-                },
-                {
-                    label: 'Pirum',
-                    data: <?php echo json_encode($manufacturer_data['Pirum']); ?>,
-                    borderColor: '#4A90E2',
-                    fill: false
-                },
-                {
-                    label: 'VanArsdel',
-                    data: <?php echo json_encode($manufacturer_data['VanArsdel']); ?>,
-                    borderColor: '#FFD700',
-                    fill: false
-                }
-            ]
+            labels: <?php echo json_encode($labels); ?>,
+            datasets: [{
+                label: 'จำนวนคลิก',
+                data: <?php echo json_encode($click_data); ?>,
+                borderColor: '#4A90E2',
+                backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                fill: true,
+                tension: 0.4,
+                pointBackgroundColor: '#fff',
+                pointBorderColor: '#4A90E2',
+                pointBorderWidth: 2,
+                pointRadius: 4
+            }]
         },
         options: {
             responsive: true,
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 2000
+                    title: {
+                        display: true,
+                        text: 'จำนวนคลิก'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'วันที่'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${context.raw} คลิก`;
+                        }
+                    }
                 }
             }
         }
     });
+</script>
+
+<!-- เพิ่มส่วนนี้ใน dashboard.php เพื่อ debug -->
+<script>
+    console.log('Labels:', <?php echo json_encode($labels); ?>);
+    console.log('Click Data:', <?php echo json_encode($click_data); ?>);
 </script>
 
 <?php include 'partials/footer.php'; ?>

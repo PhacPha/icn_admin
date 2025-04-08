@@ -20,9 +20,7 @@ $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
 $total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
 $total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
-
-// เพิ่มการดึงข้อมูล total_clicks
-$total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0; // ถ้าไม่มีข้อมูลให้เป็น 0
+$total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0;
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
 $social_posts = [
@@ -36,18 +34,32 @@ while ($row = $stmt->fetch()) {
     $social_posts[$row['platform']] = $row['post_count'];
 }
 
-// ดึงข้อมูลสำหรับกราฟ
-$manufacturer_data = [
-    'Aliqui' => array_fill(0, 12, 0),
-    'Natura' => array_fill(0, 12, 0),
-    'Pirum' => array_fill(0, 12, 0),
-    'VanArsdel' => array_fill(0, 12, 0)
-];
-$months = ['Jan-14', 'Feb-14', 'Mar-14', 'Apr-14', 'May-14', 'Jun-14', 'Jul-14', 'Aug-14', 'Sep-14', 'Oct-14', 'Nov-14', 'Dec-14'];
-while ($row = $stmt->fetch()) {
-    $month_index = array_search($row['month'], $months);
-    if ($month_index !== false) {
-        $manufacturer_data[$row['manufacturer']][$month_index] = $row['units'];
+// ดึงข้อมูลสำหรับกราฟคลิก
+$days = 7;
+$click_data = [];
+$labels = [];
+
+for ($i = $days - 1; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $labels[] = date('d M', strtotime($date));
+}
+
+$stmt = $pdo->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+$stmt->execute([$days]);
+$clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($labels as $index => $label) {
+    $date = date('Y-m-d', strtotime("-$index days"));
+    $found = false;
+    foreach ($clicks as $click) {
+        if ($click['click_date'] === $date) {
+            $click_data[] = (int) $click['click_count'];
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $click_data[] = 0;
     }
 }
 
@@ -62,10 +74,12 @@ switch ($page) {
         include 'views/dashboard.php';
         break;
     case 'home':
-        if (!file_exists('controllers/LogoController.php') || 
-            !file_exists('controllers/HomeServiceController.php') || 
-            !file_exists('controllers/WorkController.php') || 
-            !file_exists('controllers/TestimonialController.php')) {
+        if (
+            !file_exists('controllers/LogoController.php') ||
+            !file_exists('controllers/HomeServiceController.php') ||
+            !file_exists('controllers/WorkController.php') ||
+            !file_exists('controllers/TestimonialController.php')
+        ) {
             die("Error: ไม่พบไฟล์ Controller ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
         }
         include 'controllers/LogoController.php';
