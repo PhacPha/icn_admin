@@ -19,15 +19,6 @@ $total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
 $total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
 $total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
-<<<<<<< HEAD
-$total_testimonials = $pdo->query("SELECT COUNT(*) FROM testimonials")->fetchColumn();
-$total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
-
-// ดึงจำนวนเซสชันของ admin ปัจจุบัน
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM sessions WHERE admin_id = ?");
-$stmt->execute([$_SESSION['admin_id']]);
-$total_sessions = $stmt->fetchColumn();
-=======
 $total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 
 // เพิ่มการดึงข้อมูล total_clicks
@@ -59,7 +50,6 @@ while ($row = $stmt->fetch()) {
         $manufacturer_data[$row['manufacturer']][$month_index] = $row['units'];
     }
 }
->>>>>>> origin/contact-page
 
 // Routing ตามหน้า
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
@@ -147,17 +137,4 @@ switch ($page) {
         echo "404 - Page Not Found";
         break;
 }
-<<<<<<< HEAD
 ?>
-
-
-
-
-
-
-
-
-require_once '../admin-backup/config/db_connect.php';
-=======
-?>
->>>>>>> origin/contact-page
