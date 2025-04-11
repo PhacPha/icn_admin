@@ -40,20 +40,15 @@ class DashboardController
         $click_data = [];
         $labels = [];
 
-        // สร้าง label ของวันที่ย้อนหลัง 7 วัน (เช่น "07 Apr")
-        for ($i = $days - 1; $i >= 0; $i--) {
-            $date = date('Y-m-d', strtotime("-$i days"));
-            $labels[] = date('d M', strtotime($date));
-        }
-
         // ดึงข้อมูลคลิกในช่วง 7 วันที่ผ่านมา
         $stmt = $GLOBALS['pdo']->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
         $stmt->execute([$days]);
         $clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        // เติมข้อมูลคลิกใน array: ถ้าวันไหนไม่มีข้อมูลให้เป็น 0
-        foreach ($labels as $index => $label) {
-            $date = date('Y-m-d', strtotime("-$index days"));
+        // สร้าง labels และ click_data
+        for ($i = $days - 1; $i >= 0; $i--) {
+            $date = date('Y-m-d', strtotime("-$i days"));
+            $labels[] = date('d M', strtotime($date));
             $found = false;
             foreach ($clicks as $click) {
                 if ($click['click_date'] === $date) {
@@ -75,14 +70,10 @@ class DashboardController
         // ดึงข้อมูลสถิติอุปกรณ์จากตาราง device_logs (สมมุติว่ามีฟิลด์ 'device')
         // ผลลัพธ์จะได้เป็น array แบบ key => value (เช่น 'Desktop' => 120)
         $stmt = $GLOBALS['pdo']->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
-        $device_stats = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-        // หาก PHP version ของคุณไม่รองรับ PDO::FETCH_KEY_PAIR ให้ใช้วิธีด้านล่างแทน:
-        /*
         $device_stats = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $device_stats[$row['device']] = $row['total'];
         }
-        */
 
         // ส่งตัวแปรทั้งหมดไปยัง View
         include __DIR__ . '/../views/dashboard.php';
