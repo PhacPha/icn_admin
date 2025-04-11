@@ -29,6 +29,11 @@
                 </a>
             </li>
             <li class="mb-4">
+                <a href="index.php?page=web_blog" class="flex items-center gap-3 p-3">
+                    <i class="fas fa-blog"></i> Web Blog
+                </a>
+            </li>
+            <li class="mb-4">
                 <a href="../admin-backup/logout.php" class="flex items-center gap-3 p-3">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>

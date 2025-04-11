@@ -64,6 +64,11 @@ foreach ($labels as $index => $label) {
     }
 }
 
+  // ข้อมูลประเทศ
+  $countryStmt = $GLOBALS['pdo']->query("SELECT country_name, COUNT(*) as total FROM ip_country GROUP BY country_name ORDER BY total DESC");
+  $countries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+  $total_visits = array_sum(array_column($countries, 'total'));
+
 // *** ดึงข้อมูลสถิติอุปกรณ์ (Devices Used) ***
 // สมมุติว่ามีตาราง device_logs ที่มีฟิลด์ 'device'
 $stmt = $pdo->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
@@ -84,24 +89,16 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 switch ($page) {
     case 'dashboard':
-        if (!file_exists('views/dashboard.php')) {
-            die("Error: ไม่พบไฟล์ dashboard.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
-        }
-        include 'views/dashboard.php';
+        require_once 'controllers/DashboardController.php';
+        $controller = new DashboardController();
+        $controller->index();
         break;
+
     case 'home':
-        if (
-            !file_exists('controllers/LogoController.php') ||
-            !file_exists('controllers/HomeServiceController.php') ||
-            !file_exists('controllers/WorkController.php') ||
-            !file_exists('controllers/TestimonialController.php')
-        ) {
-            die("Error: ไม่พบไฟล์ Controller ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
-        }
-        include 'controllers/LogoController.php';
-        include 'controllers/HomeServiceController.php';
-        include 'controllers/WorkController.php';
-        include 'controllers/TestimonialController.php';
+        require_once 'controllers/LogoController.php';
+        require_once 'controllers/HomeServiceController.php';
+        require_once 'controllers/WorkController.php';
+        require_once 'controllers/TestimonialController.php';
 
         $logoController = new LogoController();
         $serviceController = new HomeServiceController();
@@ -114,28 +111,20 @@ switch ($page) {
         $testimonialController->manage();
 
         if (!file_exists('views/home.php')) {
-            die("Error: ไม่พบไฟล์ home.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
+            die("Error: ไม่พบไฟล์ views/home.php");
         }
         include 'views/home.php';
         break;
+
     case 'service_management':
-        if (!file_exists('controllers/ServiceManagementController.php')) {
-            die("Error: ไม่พบไฟล์ ServiceManagementController.php ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
-        }
-        include 'controllers/ServiceManagementController.php';
+        require_once 'controllers/ServiceManagementController.php';
         $serviceManagementController = new ServiceManagementController();
         $serviceManagementController->manage();
-
-        if (!file_exists('views/service_management.php')) {
-            die("Error: ไม่พบไฟล์ service_management.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
-        }
         include 'views/service_management.php';
         break;
+
     case 'content_management':
-        if (!file_exists('controllers/ContentManagementController.php')) {
-            die("Error: ไม่พบไฟล์ ContentManagementController.php ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
-        }
-        include 'controllers/ContentManagementController.php';
+        require_once 'controllers/ContentManagementController.php';
         $contentManagementController = new ContentManagementController();
         $contentManagementController->manage();
 
@@ -144,25 +133,23 @@ switch ($page) {
         }
         include 'views/content_management.php';
         break;
+
     case 'contact_messages':
-        if (!file_exists('controllers/ContactMessagesController.php')) {
-            die("Error: ไม่พบไฟล์ ContactMessagesController.php ในโฟลเดอร์ /iconnex_thailand_db/controllers/");
-        }
-        include 'controllers/ContactMessagesController.php';
+        require_once 'controllers/ContactMessagesController.php';
         $contactMessagesController = new ContactMessagesController();
         $contactMessagesController->manage();
-
-        if (!file_exists('views/contact_messages.php')) {
-            die("Error: ไม่พบไฟล์ contact_messages.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
-        }
         include 'views/contact_messages.php';
         break;
+
     case 'reply_message':
-        if (!file_exists('views/reply_message.php')) {
-            die("Error: ไม่พบไฟล์ reply_message.php ในโฟลเดอร์ /iconnex_thailand_db/views/");
-        }
         include 'views/reply_message.php';
         break;
+
+    case 'logout':
+        session_destroy();
+        header("Location: login.php");
+        break;
+
     default:
         echo "404 - Page Not Found";
         break;

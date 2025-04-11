@@ -1,11 +1,19 @@
 <?php
-session_start();
+
 
 // โหลดไฟล์เชื่อมต่อฐานข้อมูล
-require_once '../config/db_connect.php';
+require_once __DIR__ . '/../config/db_connect.php';
 
 class DashboardController
 {
+    private $pdo;
+
+    public function __construct()
+    {
+        global $pdo;
+        $this->pdo = $pdo;
+    }
+
     public function index()
     {
         // ตรวจสอบว่ามี admin_id ใน session หรือไม่
@@ -54,7 +62,13 @@ class DashboardController
             }
         }
 
-        // ดึงข้อมูลสถิติอุปกรณ์
+        // ข้อมูลประเทศ
+        $countryStmt = $GLOBALS['pdo']->query("SELECT country_name, COUNT(*) as total FROM ip_country GROUP BY country_name ORDER BY total DESC");
+        $countries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+        $total_visits = array_sum(array_column($countries, 'total'));
+
+        // ดึงข้อมูลสถิติอุปกรณ์จากตาราง device_logs (สมมุติว่ามีฟิลด์ 'device')
+        // ผลลัพธ์จะได้เป็น array แบบ key => value (เช่น 'Desktop' => 120)
         $stmt = $GLOBALS['pdo']->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
         $device_stats = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -62,7 +76,8 @@ class DashboardController
         }
 
         // ส่งตัวแปรทั้งหมดไปยัง View
-        include '../views/dashboard.php';
+        include __DIR__ . '/../views/dashboard.php';
+
     }
 }
 ?>
