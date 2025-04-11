@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset_password'])) {
             </div>
             <button type="submit" class="btn btn-login">เข้าสู่ระบบ</button>
         </form>
-        <p>ยังไม่มีบัญชี? <a href="register.php">สมัครสมาชิก</a> | <a href="#" onclick="showModal()">ลืมรหัสผ่าน?</a>
+        <p><a href="#" onclick="showModal()">ลืมรหัสผ่าน?</a>
         </p>
     </div>
 
