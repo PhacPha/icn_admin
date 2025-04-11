@@ -1,41 +1,6 @@
 <?php include 'partials/header.php'; ?>
 <?php include 'partials/sidebar.php'; ?>
 
-<?php
-// ดึงข้อมูลสำหรับกราฟคลิก
-$days = 7;
-$click_data = [];
-$labels = [];
-
-for ($i = $days - 1; $i >= 0; $i--) {
-    $date = date('Y-m-d', strtotime("-$i days"));
-    $labels[] = date('d M', strtotime($date));
-}
-
-$stmt = $GLOBALS['pdo']->prepare("
-    SELECT click_date, click_count 
-    FROM clicks 
-    WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)
-");
-$stmt->execute([$days]);
-$clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-foreach ($labels as $index => $label) {
-    $date = date('Y-m-d', strtotime("-$index days"));
-    $found = false;
-    foreach ($clicks as $click) {
-        if ($click['click_date'] === $date) {
-            $click_data[] = (int)$click['click_count'];
-            $found = true;
-            break;
-        }
-    }
-    if (! $found) {
-        $click_data[] = 0;
-    }
-}
-?>
-
 <main class="main-content w-full px-6 py-6">
   <h1 class="text-2xl font-bold mb-6">Dash Board</h1>
 
@@ -77,27 +42,7 @@ foreach ($labels as $index => $label) {
     <!-- Left column: Social + Chart -->
     <div class="flex-1 space-y-6 w-full">
       <!-- Social Media Posts Section -->
-      <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
-        <h3 class="text-lg font-semibold mb-4">จำนวนโพสต์ในโซเชียล</h3>
-        <table class="min-w-full text-left">
-          <thead>
-            <tr class="border-b">
-              <th class="py-2 px-3">แพลตฟอร์ม</th>
-              <th class="py-2 px-3">จำนวนโพสต์</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php foreach (['Facebook','Instagram','YouTube','Line'] as $pf): ?>
-            <tr class="hover:bg-gray-50">
-              <td class="py-2 px-3 flex items-center">
-                <i class="fab fa-<?= strtolower($pf) ?> mr-2"></i><?= $pf ?>
-              </td>
-              <td class="py-2 px-3"><?= $social_posts[$pf] ?? 0 ?></td>
-            </tr>
-            <?php endforeach; ?>
-          </tbody>
-        </table>
-      </div>
+
 
       <!-- Clicks Chart Section -->
       <div class="bg-white p-4 rounded-lg shadow w-full">
@@ -142,10 +87,10 @@ foreach ($labels as $index => $label) {
           <tbody>
             <?php if (!empty($device_stats)): ?>
               <?php foreach ($device_stats as $dev => $cnt): ?>
-              <tr class="hover:bg-gray-50">
-                <td class="py-2 px-3"><?= htmlspecialchars($dev) ?></td>
-                <td class="py-2 px-3"><?= number_format($cnt) ?></td>
-              </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="py-2 px-3"><?= htmlspecialchars($dev) ?></td>
+                  <td class="py-2 px-3"><?= number_format($cnt) ?></td>
+                </tr>
               <?php endforeach; ?>
             <?php else: ?>
               <tr>
@@ -172,14 +117,16 @@ foreach ($labels as $index => $label) {
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+  let labels = <?= json_encode($labels) ?>.reverse();
+  let clickData = <?= json_encode($click_data) ?>;
   const ctx = document.getElementById('clicksChart').getContext('2d');
   new Chart(ctx, {
     type: 'line',
     data: {
-      labels: <?= json_encode($labels) ?>,
+      labels: labels,
       datasets: [{
         label: 'จำนวนคลิก',
-        data: <?= json_encode($click_data) ?>,
+        data: clickData,
         borderColor: 'rgba(74,144,226,1)',
         backgroundColor: 'rgba(74,144,226,0.2)',
         fill: true,
@@ -194,8 +141,14 @@ foreach ($labels as $index => $label) {
       maintainAspectRatio: false,
       responsive: true,
       scales: {
-        y: { beginAtZero: true, title: { display: true, text: 'จำนวนคลิก' } },
-        x: { title: { display: true, text: 'วันที่' } }
+        y: { 
+          beginAtZero: true, 
+          title: { display: true, text: 'จำนวนคลิก' } 
+        },
+        x: { 
+          title: { display: true, text: 'วันที่' },
+          reverse: true
+        }
       },
       plugins: {
         legend: { display: true, position: 'top' },
@@ -208,4 +161,3 @@ foreach ($labels as $index => $label) {
     }
   });
 </script>
- 

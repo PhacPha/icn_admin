@@ -2,10 +2,10 @@
 session_start();
 
 // ตรวจสอบและรวมไฟล์ db_connect.php
-if (!file_exists('../admin/config/db_connect.php')) {
-    die("Error: ไม่พบไฟล์ db_connect.php ในโฟลเดอร์ /iconnex_thailand_db/config/");
+if (!file_exists('../admin-backup/config/db_connect.php')) {
+    die("Error: ไม่พบไฟล์ db_connect.php ในโฟลเดอร์");
 }
-require_once '../admin/config/db_connect.php';
+require_once '../admin-backup/config/db_connect.php';
 
 // ถ้ามี session admin อยู่แล้ว ให้ redirect ไปหน้า Dashboard
 if (isset($_SESSION['admin_id'])) {

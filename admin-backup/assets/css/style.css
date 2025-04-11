@@ -64,7 +64,7 @@ body {
 
 /* Active link styling (optional) */
 .sidebar nav ul li a.active {
-  background-color: #3498db;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 /* Icon styling */

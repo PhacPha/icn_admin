@@ -8,18 +8,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const button = document.querySelector('.btn-register');
 
     // เพิ่ม particle effect พื้นหลัง
-    const particles = document.createElement('div');
-    particles.className = 'particles';
-    document.body.appendChild(particles);
+    // const particles = document.createElement('div');
+    // particles.className = 'particles';
+    // document.body.appendChild(particles);
 
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.top = Math.random() * 100 + 'vh';
-        particle.style.animationDuration = Math.random() * 10 + 5 + 's';
-        particles.appendChild(particle);
-    }
+    // for (let i = 0; i < 50; i++) {
+    //     const particle = document.createElement('div');
+    //     particle.className = 'particle';
+    //     particle.style.left = Math.random() * 100 + 'vw';
+    //     particle.style.top = Math.random() * 100 + 'vh';
+    //     particle.style.animationDuration = Math.random() * 10 + 5 + 's';
+    //     particles.appendChild(particle);
+    // }
 
     // การตรวจสอบและส่งฟอร์ม
     form.addEventListener('submit', function(e) {
