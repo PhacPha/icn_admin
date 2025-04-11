@@ -21,6 +21,7 @@ $total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 $total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
 $total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
 $total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0;
+$online_users = $pdo->query("SELECT COUNT(*) FROM user_activity")->fetchColumn() ?: 0;
 
 // ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
 $social_posts = [

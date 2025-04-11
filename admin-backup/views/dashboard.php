@@ -41,9 +41,6 @@
 
     <!-- Left column: Social + Chart -->
     <div class="flex-1 space-y-6 w-full">
-      <!-- Social Media Posts Section -->
-
-
       <!-- Clicks Chart Section -->
       <div class="bg-white p-4 rounded-lg shadow w-full">
         <h3 class="text-lg font-semibold mb-4">จำนวนคลิกต่อวัน (7 วันล่าสุด)</h3>
@@ -55,36 +52,36 @@
 
     <!-- Right column: Countries, Devices, Online Users -->
     <div class="w-full lg:w-1/3 flex flex-col gap-6">
-         <!-- Countries Visiting Section -->
-<div class="countries-stats bg-white p-4 rounded-lg shadow mb-6">
-    <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
-    <table class="w-full text-left">
-        <thead>
+      <!-- Countries Visiting Section -->
+      <div class="countries-stats bg-white p-4 rounded-lg shadow mb-6">
+        <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
+        <table class="w-full text-left">
+          <thead>
             <tr>
-                <th class="p-2">ประเทศ</th>
-                <th class="p-2">จำนวนการเข้าชม</th>
-                <th class="p-2">เปอร์เซ็นต์</th>
+              <th class="p-2">ประเทศ</th>
+              <th class="p-2">จำนวนการเข้าชม</th>
+              <th class="p-2">เปอร์เซ็นต์</th>
             </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
             <?php if (!empty($countries)): ?>
-                <?php foreach ($countries as $row): ?>
-                    <tr>
-                        <td class="p-2"><?= htmlspecialchars($row['country_name']) ?></td>
-                        <td class="p-2"><?= number_format($row['total']) ?></td>
-                        <td class="p-2"><?= round(($row['total'] / $total_visits) * 100, 2) ?>%</td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+              <?php foreach ($countries as $row): ?>
                 <tr>
-                    <td class="p-2">ยังไม่มีข้อมูล</td>
-                    <td class="p-2">0</td>
-                    <td class="p-2">0%</td>
+                  <td class="p-2"><?= htmlspecialchars($row['country_name']) ?></td>
+                  <td class="p-2"><?= number_format($row['total']) ?></td>
+                  <td class="p-2"><?= round(($row['total'] / $total_visits) * 100, 2) ?>%</td>
                 </tr>
+              <?php endforeach; ?>
+            <?php else: ?>
+              <tr>
+                <td class="p-2">ยังไม่มีข้อมูล</td>
+                <td class="p-2">0</td>
+                <td class="p-2">0%</td>
+              </tr>
             <?php endif; ?>
-        </tbody>
-    </table>
-</div>
+          </tbody>
+        </table>
+      </div>
 
       <!-- Devices Used Section -->
       <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
@@ -114,33 +111,29 @@
         </table>
       </div>
 
-     <!-- Current Online Users Section -->
-  <div class="bg-white p-4 rounded-lg shadow text-center w-full">
-    <h3 class="text-lg font-semibold mb-3">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
-    <p class="text-2xl font-bold">
-    <span id="online-count"><?= number_format($online_users) ?></span>
-    <span class="text-gray-500 text-sm">ผู้ใช้</span>
-  </p>
-</div>
+      <!-- Current Online Users Section -->
+      <div class="bg-white p-4 rounded-lg shadow text-center w-full">
+        <h3 class="text-lg font-semibold mb-3">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
+        <p class="text-2xl font-bold">
+          <span id="online-count"><?= number_format($online_users) ?></span>
+          <span class="text-gray-500 text-sm">ผู้ใช้</span>
+        </p>
+      </div>
 
-<script>
-  function updateOnlineCount() {
-    fetch('/iconnex_thailand_db/count_online.php')
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('online-count').textContent = data.count;
-      })
-      .catch(console.error);
-  }
-  // เรียกครั้งแรก และทุก 5 วินาที
-  updateOnlineCount();
-  setInterval(updateOnlineCount, 5000);
-</script>
-
-
-
+      <script>
+        function updateOnlineCount() {
+          fetch('/iconnex_thailand_db/count_online.php')
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById('online-count').textContent = data.count;
+            })
+            .catch(console.error);
+        }
+        // เรียกครั้งแรก และทุก 5 วินาที
+        updateOnlineCount();
+        setInterval(updateOnlineCount, 5000);
+      </script>
     </div>
-
   </div>
 </main>
 
@@ -149,16 +142,14 @@
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-  let labels = <?= json_encode($labels) ?>.reverse();
-  let clickData = <?= json_encode($click_data) ?>;
   const ctx = document.getElementById('clicksChart').getContext('2d');
   new Chart(ctx, {
     type: 'line',
     data: {
-      labels: labels,
+      labels: <?= json_encode($labels) ?>,
       datasets: [{
         label: 'จำนวนคลิก',
-        data: clickData,
+        data: <?= json_encode($click_data) ?>,
         borderColor: 'rgba(74,144,226,1)',
         backgroundColor: 'rgba(74,144,226,0.2)',
         fill: true,
