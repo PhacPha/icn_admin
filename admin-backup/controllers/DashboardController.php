@@ -1,8 +1,8 @@
 <?php
-session_start();
+
 
 // โหลดไฟล์เชื่อมต่อฐานข้อมูล
-require_once '../config/db_connect.php';
+require_once __DIR__ . '/../config/db_connect.php';
 
 class DashboardController
 {
@@ -85,7 +85,8 @@ class DashboardController
         */
 
         // ส่งตัวแปรทั้งหมดไปยัง View
-        include '../views/dashboard.php';
+        include __DIR__ . '/../views/dashboard.php';
+
     }
 }
 ?>

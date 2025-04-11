@@ -3,7 +3,7 @@ if (!defined('SILENT_MODE')) {
     header('Content-Type: application/json');
 }
 
-require_once '../icn_admin-1/admin-backup/controllers/record_ip.php';
+require_once '../icn_admin/admin-backup/controllers/record_ip.php';
 
 function getCountryNameFromCode($code) {
     $url = "https://restcountries.com/v3.1/alpha/" . urlencode($code);

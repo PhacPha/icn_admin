@@ -169,11 +169,30 @@ foreach ($labels as $index => $label) {
         </table>
       </div>
 
-      <!-- Current Online Users Section -->
-      <div class="bg-white p-4 rounded-lg shadow text-center w-full">
-        <h3 class="text-lg font-semibold mb-3">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
-        <p class="text-2xl font-bold">0 <span class="text-gray-500 text-sm">ผู้ใช้</span></p>
-      </div>
+    <!-- Current Online Users Section -->
+  <div class="bg-white p-4 rounded-lg shadow text-center w-full">
+    <h3 class="text-lg font-semibold mb-3">จำนวน User ที่ออนไลน์อยู่ในตอนนี้</h3>
+    <p class="text-2xl font-bold">
+    <span id="online-count"><?= number_format($online_users) ?></span>
+    <span class="text-gray-500 text-sm">ผู้ใช้</span>
+  </p>
+</div>
+
+<script>
+  function updateOnlineCount() {
+    fetch('/iconnex_thailand_db/count_online.php')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('online-count').textContent = data.count;
+      })
+      .catch(console.error);
+  }
+  // เรียกครั้งแรก และทุก 5 วินาที
+  updateOnlineCount();
+  setInterval(updateOnlineCount, 5000);
+</script>
+
+
     </div>
 
   </div>
