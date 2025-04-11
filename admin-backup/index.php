@@ -1,9 +1,91 @@
 <?php
 session_start();
-require_once 'config/db_connect.php';
+require_once '../admin-backup/config/db_connect.php'; // ปรับ path การเชื่อมต่อฐานข้อมูลตามโปรเจกต์ของคุณ
 
-// รับค่าหน้าจาก query string เช่น ?page=dashboard
-$page = $_GET['page'] ?? 'dashboard';
+// ตรวจสอบว่าเป็น admin หรือไม่
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+// ดึงข้อมูล admin ที่ล็อกอิน
+$stmt = $pdo->prepare("SELECT name FROM admins WHERE id = ?");
+$stmt->execute([$_SESSION['admin_id']]);
+$admin = $stmt->fetch();
+$admin_name = $admin ? $admin['name'] : "Guest";
+
+// ดึงข้อมูลสรุปสำหรับ Dashboard
+$total_admins = $pdo->query("SELECT COUNT(*) FROM admins")->fetchColumn();
+$total_logos = $pdo->query("SELECT COUNT(*) FROM logos")->fetchColumn();
+$total_services = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
+$total_works = $pdo->query("SELECT COUNT(*) FROM works")->fetchColumn();
+$total_contact_messages = $pdo->query("SELECT COUNT(*) FROM contact_messages")->fetchColumn();
+$total_clicks = $pdo->query("SELECT SUM(click_count) FROM clicks")->fetchColumn() ?: 0;
+
+// ดึงข้อมูลโพสต์ในโซเชียลมีเดีย
+$social_posts = [
+    'Facebook' => 0,
+    'Instagram' => 0,
+    'YouTube' => 0,
+    'Line' => 0
+];
+$stmt = $pdo->query("SELECT platform, post_count FROM social_posts");
+while ($row = $stmt->fetch()) {
+    $social_posts[$row['platform']] = $row['post_count'];
+}
+
+// ดึงข้อมูลสำหรับกราฟคลิก (7 วันล่าสุด)
+$days = 7;
+$click_data = [];
+$labels = [];
+
+// สร้าง label สำหรับวันที่ย้อนหลัง 7 วัน (เช่น "07 Apr")
+for ($i = $days - 1; $i >= 0; $i--) {
+    $date = date('Y-m-d', strtotime("-$i days"));
+    $labels[] = date('d M', strtotime($date));
+}
+
+$stmt = $pdo->prepare("SELECT click_date, click_count FROM clicks WHERE click_date >= DATE_SUB(CURDATE(), INTERVAL ? DAY)");
+$stmt->execute([$days]);
+$clicks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($labels as $index => $label) {
+    $date = date('Y-m-d', strtotime("-$index days"));
+    $found = false;
+    foreach ($clicks as $click) {
+        if ($click['click_date'] === $date) {
+            $click_data[] = (int) $click['click_count'];
+            $found = true;
+            break;
+        }
+    }
+    if (!$found) {
+        $click_data[] = 0;
+    }
+}
+
+  // ข้อมูลประเทศ
+  $countryStmt = $GLOBALS['pdo']->query("SELECT country_name, COUNT(*) as total FROM ip_country GROUP BY country_name ORDER BY total DESC");
+  $countries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+  $total_visits = array_sum(array_column($countries, 'total'));
+
+// *** ดึงข้อมูลสถิติอุปกรณ์ (Devices Used) ***
+// สมมุติว่ามีตาราง device_logs ที่มีฟิลด์ 'device'
+$stmt = $pdo->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
+// หาก PHP ของคุณรองรับ PDO::FETCH_KEY_PAIR (PHP 7.4 ขึ้นไป)
+// คุณสามารถใช้แบบนี้:
+$device_stats = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+
+// ถ้าไม่รองรับ ให้ใช้วิธีแบบ loop ดังนี้:
+/*
+$device_stats = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $device_stats[$row['device']] = $row['total'];
+}
+*/
+
+// Routing ตามหน้า (controller และ view ต่าง ๆ)
+$page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 switch ($page) {
     case 'dashboard':
@@ -45,6 +127,10 @@ switch ($page) {
         require_once 'controllers/ContentManagementController.php';
         $contentManagementController = new ContentManagementController();
         $contentManagementController->manage();
+
+        if (!file_exists('views/content_management.php')) {
+            die("Error: ไม่พบไฟล์ content_management.php ในโฟลded /iconnex_thailand_db/views/");
+        }
         include 'views/content_management.php';
         break;
 
@@ -68,3 +154,4 @@ switch ($page) {
         echo "404 - Page Not Found";
         break;
 }
+?>
