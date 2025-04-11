@@ -110,24 +110,36 @@ foreach ($labels as $index => $label) {
 
     <!-- Right column: Countries, Devices, Online Users -->
     <div class="w-full lg:w-1/3 flex flex-col gap-6">
-      <!-- Countries Visiting Section -->
-      <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">
-        <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
-        <table class="min-w-full text-left">
-          <thead>
-            <tr class="border-b">
-              <th class="py-2 px-3">ประเทศ</th>
-              <th class="py-2 px-3">จำนวนการเข้าชม</th>
-            </tr>
-          </thead>
-          <tbody>
+         <!-- Countries Visiting Section -->
+<div class="countries-stats bg-white p-4 rounded-lg shadow mb-6">
+    <h3 class="text-lg font-semibold mb-4">ประเทศที่เข้าชม</h3>
+    <table class="w-full text-left">
+        <thead>
             <tr>
-              <td class="py-2 px-3">ยังไม่มีข้อมูล</td>
-              <td class="py-2 px-3">0</td>
+                <th class="p-2">ประเทศ</th>
+                <th class="p-2">จำนวนการเข้าชม</th>
+                <th class="p-2">เปอร์เซ็นต์</th>
             </tr>
-          </tbody>
-        </table>
-      </div>
+        </thead>
+        <tbody>
+            <?php if (!empty($countries)): ?>
+                <?php foreach ($countries as $row): ?>
+                    <tr>
+                        <td class="p-2"><?= htmlspecialchars($row['country_name']) ?></td>
+                        <td class="p-2"><?= number_format($row['total']) ?></td>
+                        <td class="p-2"><?= round(($row['total'] / $total_visits) * 100, 2) ?>%</td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <tr>
+                    <td class="p-2">ยังไม่มีข้อมูล</td>
+                    <td class="p-2">0</td>
+                    <td class="p-2">0%</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
 
       <!-- Devices Used Section -->
       <div class="bg-white p-4 rounded-lg shadow overflow-x-auto w-full">

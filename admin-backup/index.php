@@ -64,6 +64,11 @@ foreach ($labels as $index => $label) {
     }
 }
 
+  // ข้อมูลประเทศ
+  $countryStmt = $GLOBALS['pdo']->query("SELECT country_name, COUNT(*) as total FROM ip_country GROUP BY country_name ORDER BY total DESC");
+  $countries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+  $total_visits = array_sum(array_column($countries, 'total'));
+
 // *** ดึงข้อมูลสถิติอุปกรณ์ (Devices Used) ***
 // สมมุติว่ามีตาราง device_logs ที่มีฟิลด์ 'device'
 $stmt = $pdo->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");

@@ -59,6 +59,11 @@ class DashboardController
             }
         }
 
+        // ข้อมูลประเทศ
+        $countryStmt = $GLOBALS['pdo']->query("SELECT country_name, COUNT(*) as total FROM ip_country GROUP BY country_name ORDER BY total DESC");
+        $countries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+        $total_visits = array_sum(array_column($countries, 'total'));
+
         // ดึงข้อมูลสถิติอุปกรณ์จากตาราง device_logs (สมมุติว่ามีฟิลด์ 'device')
         // ผลลัพธ์จะได้เป็น array แบบ key => value (เช่น 'Desktop' => 120)
         $stmt = $GLOBALS['pdo']->query("SELECT device, COUNT(*) as total FROM device_logs GROUP BY device");
